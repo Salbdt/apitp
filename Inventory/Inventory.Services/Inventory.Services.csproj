@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inventory.DTOs\Inventory.DTOs.csproj" />
+    <ProjectReference Include="..\Inventory.Entities\Inventory.Entities.csproj" />
+    <ProjectReference Include="..\Inventory.Persistence\Inventory.Persistence.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
