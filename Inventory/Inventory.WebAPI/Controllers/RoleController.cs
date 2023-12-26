@@ -23,15 +23,15 @@ namespace Inventory.WebAPI.Controllers
 
             var items = await _roleService.GetAllAsync();
 
-            if (items.Count > 0)
+            if (items.Count == 0)
+                _result = NotFound("Resultado de la búsqueda: No se encontraron items");
+            else
             {
                 foreach (var item in items)
                     roleListDTOs.Add(new RoleListDTO(item));
 
                 _result = Ok(roleListDTOs);
-            }          
-            else
-                _result = NotFound("Resultado de la búsqueda: No se encontraron elementos");
+            }
 
             return _result;
         }
@@ -41,10 +41,10 @@ namespace Inventory.WebAPI.Controllers
         {
             var item = await _roleService.GetByIdAsync(id);
 
-            if (item is not null)
-                _result = Ok(new RoleListDTO(item));       
+            if (item is null)
+                _result = NotFound("Resultado de la búsqueda: Item no encontrado");
             else
-                _result = NotFound("Resultado de la búsqueda: Elemento no encontrado");
+                _result = Ok(new RoleListDTO(item));
 
             return _result;
         }

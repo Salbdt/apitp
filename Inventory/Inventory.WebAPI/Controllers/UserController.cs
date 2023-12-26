@@ -21,12 +21,11 @@ namespace Inventory.WebAPI.Controllers
         {
             var item = await _userService.CreateAsync(userPutDTO.ToEntity());
 
-            if (item is not null)
-            {
-                _result = Ok(new UserListDTO(item));
-            }          
+            if (item is null)
+                _result = BadRequest("Resultado de la inserción: Item no creado");       
             else
-                _result = BadRequest("Resultado: Elemento no encontrado");
+                _result = Ok(new UserListDTO(item));
+                
 
             return _result;
         }
@@ -38,15 +37,15 @@ namespace Inventory.WebAPI.Controllers
 
             var items = await _userService.GetAllAsync();
 
-            if (items.Count > 0)
+            if (items.Count == 0)
+                _result = NotFound("Resultado de la búsqueda: No se encontraron items");
+            else
             {
                 foreach (var item in items)
                     userListDTOs.Add(new UserListDTO(item));
 
                 _result = Ok(userListDTOs);
-            }          
-            else
-                _result = NotFound("Resultado de la búsqueda: No se encontraron elementos");
+            }
 
             return _result;
         }
@@ -56,10 +55,36 @@ namespace Inventory.WebAPI.Controllers
         {
             var item = await _userService.GetByIdAsync(id);
 
-            if (item is not null)
-                _result = Ok(new UserListDTO(item));       
+            if (item is null)
+                _result = NotFound("Resultado de la búsqueda: Item no encontrado");
             else
-                _result = NotFound("Resultado de la búsqueda: Elemento no encontrado");
+                _result = Ok(new UserListDTO(item));
+
+            return _result;
+        }
+
+        [HttpPut("{id};{email};{password}")]
+        public async Task<IActionResult> Update(int id, string email, string password, UserPutDTO userPutDTO)
+        {
+            var item = await _userService.UpdateAsync(id, email, password, userPutDTO.ToEntity());
+
+            if (!item)
+                _result = BadRequest($"Resultado de la actualización: Item no encontrado");
+            else
+                _result = Ok($"Resultado de la actualización: Item {id} actualizado");
+
+            return _result;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = await _userService.DeleteAsync(id);
+
+            if (!item)
+                _result = BadRequest("Resultado de la eliminación: Item no encontrado");
+            else
+                _result = Ok($"Resultado de la eliminación: Item {id} eliminado");
 
             return _result;
         }
