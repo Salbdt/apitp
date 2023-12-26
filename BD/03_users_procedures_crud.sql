@@ -70,10 +70,11 @@ CREATE OR REPLACE PROCEDURE proc_users_update(
     v_user          OUT SYS_REFCURSOR
 )
 AS
+v_updated_at        users.updated_at%TYPE;
 BEGIN
     UPDATE users
     SET
-        role_id      = new_role_id,
+        role_id     = new_role_id,
         name        = new_name,
         email       = new_email,
         password    = STANDARD_HASH(new_password, 'SHA512'),
@@ -83,7 +84,8 @@ BEGIN
     AND
         email       = user_email
     AND
-        password    = STANDARD_HASH(user_password, 'SHA512');
+        password    = STANDARD_HASH(user_password, 'SHA512')
+    RETURNING updated_at into v_updated_at;
 
     OPEN v_user FOR
         SELECT
@@ -92,9 +94,7 @@ BEGIN
         WHERE
             id          = user_id
         AND
-            name        = new_name
-        AND
-            password    = STANDARD_HASH(new_password, 'SHA512');
+            updated_at  = v_updated_at;
         
     COMMIT;
 END;

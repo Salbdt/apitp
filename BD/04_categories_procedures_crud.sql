@@ -61,6 +61,7 @@ CREATE OR REPLACE PROCEDURE proc_categories_update(
     v_category          OUT SYS_REFCURSOR
 )
 AS
+v_updated_at        categories.updated_at%TYPE;
 BEGIN
     UPDATE categories
     SET
@@ -68,14 +69,17 @@ BEGIN
         description = new_description,
         updated_at  = SYSDATE
     WHERE
-        id          = category_id;
+        id          = category_id
+    RETURNING updated_at into v_updated_at;
         
     OPEN v_category FOR
         SELECT
-            id, name, description
+            id
         FROM categories
         WHERE
-            id = category_id;
+            id          = category_id
+        AND
+            updated_at  = v_updated_at;
     
     COMMIT;
 END;
@@ -90,7 +94,7 @@ AS
 BEGIN        
     OPEN v_category FOR
         SELECT
-            id, name, description
+            id
         FROM categories
         WHERE
             id = category_id;

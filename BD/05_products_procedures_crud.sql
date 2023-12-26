@@ -3,14 +3,27 @@ CREATE OR REPLACE PROCEDURE proc_products_create(
     new_category_id IN products.category_id%TYPE,
     new_name        IN products.name%TYPE,
     new_description IN products.description%TYPE,
-    new_price       IN products.price%TYPE
+    new_price       IN products.price%TYPE,
+    v_product       OUT SYS_REFCURSOR
 )
 AS
+v_product_id   products.id%TYPE;
 BEGIN
     INSERT INTO products
         (id, category_id, name, description, price, created_at)
     VALUES
-        (0, new_category_id, new_name, new_description, new_price, SYSDATE);
+        (0, new_category_id, new_name, new_description, new_price, SYSDATE)
+    RETURNING id into v_product_id;       
+    
+    OPEN v_product FOR
+        SELECT
+            p.id, p.category_id, c.name as category_name, p.name, p.description, p.price
+        FROM products p
+            INNER JOIN categories c ON p.category_id = c.id
+        WHERE
+            p.id = v_product_id;
+            
+    COMMIT;
 END;
 /
 
@@ -51,9 +64,11 @@ CREATE OR REPLACE PROCEDURE proc_products_update(
     new_category_id IN products.category_id%TYPE,
     new_name        IN products.name%TYPE,
     new_description IN products.description%TYPE,
-    new_price       IN products.price%TYPE 
+    new_price       IN products.price%TYPE,
+    v_product       OUT SYS_REFCURSOR
 )
 AS
+v_updated_at        products.updated_at%TYPE;
 BEGIN
     UPDATE products
     SET
@@ -63,18 +78,40 @@ BEGIN
         price       = new_price,
         updated_at  = SYSDATE
     WHERE
-        id          = product_id;
+        id          = product_id
+    RETURNING updated_at into v_updated_at;
+
+    OPEN v_product FOR
+        SELECT
+            id
+        FROM products
+        WHERE
+            id          = product_id
+        AND
+            updated_at  = v_updated_at;
+        
+    COMMIT; 
 END;
 /
 
 -- PRODUCTS DELETE
 CREATE OR REPLACE PROCEDURE proc_products_delete(
-    product_id IN products.id%TYPE
+    product_id  IN products.id%TYPE,
+    v_product   OUT SYS_REFCURSOR
 )
 AS
 BEGIN
+    OPEN v_product FOR
+        SELECT
+            id
+        FROM products
+        WHERE
+            id  = product_id;
+            
     DELETE FROM products
     WHERE
         id = product_id;
+        
+    COMMIT;
 END;
 /
