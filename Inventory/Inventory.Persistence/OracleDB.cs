@@ -7,9 +7,9 @@ namespace Inventory.Persistence
     {
         public OracleConnection _connection { get; }
 
-        public OracleDB()
+        public OracleDB(string connectionString)
         {
-            _connection = new OracleConnection("Data Source=//localhost:1521/xepdb1;User Id=inventory;Password=1011SQLexp");
+            _connection = new OracleConnection(connectionString);
         }
 
         private OracleCommand CreateCommand(string text, CommandType commandType)
@@ -94,6 +94,27 @@ namespace Inventory.Persistence
             }
 
             return data;
+        }
+
+        public OracleParameter AddParameter(string name, OracleDbType type, ParameterDirection direction, object value)
+        {
+            return new OracleParameter
+            {
+                ParameterName   = name,
+                OracleDbType    = type,
+                Direction       = direction,
+                Value           = value
+            };
+        }
+
+        public OracleParameter AddParameter(string name, OracleDbType type, ParameterDirection direction)
+        {
+            return new OracleParameter
+            {
+                ParameterName   = name,
+                OracleDbType    = type,
+                Direction       = direction
+            };
         }
     }
 }

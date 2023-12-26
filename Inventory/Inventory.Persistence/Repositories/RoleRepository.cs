@@ -13,9 +13,7 @@ namespace Inventory.Persistence.Repositories
 
         public async Task<Role> CreateAsync(Role entity)
         {
-            // TODO
-            var rol = new Role();
-            return rol;
+            return null;
         }
 
         public async Task<IEnumerable<Role>> GetAllAsync()
@@ -27,12 +25,7 @@ namespace Inventory.Persistence.Repositories
                 spName: "proc_roles_get_all",
                 parameters: new List<OracleParameter>()
                 {
-                    new OracleParameter
-                    {
-                        ParameterName = "v_roles",
-                        OracleDbType = OracleDbType.RefCursor,
-                        Direction = ParameterDirection.Output
-                    }
+                    _connection.AddParameter("v_roles", OracleDbType.RefCursor, ParameterDirection.Output)
                 }
             );
 
@@ -60,19 +53,8 @@ namespace Inventory.Persistence.Repositories
                 spName: "proc_roles_get_by_id",
                 parameters: new List<OracleParameter>()
                 {
-                    new OracleParameter
-                    {
-                        ParameterName = "role_id",
-                        OracleDbType = OracleDbType.Int32,
-                        Direction = ParameterDirection.Input,
-                        Value = id
-                    },
-                    new OracleParameter
-                    {
-                        ParameterName = "v_roles",
-                        OracleDbType = OracleDbType.RefCursor,
-                        Direction = ParameterDirection.Output
-                    }
+                    _connection.AddParameter("role_id", OracleDbType.Int32, ParameterDirection.Input, id),
+                    _connection.AddParameter("v_roles", OracleDbType.RefCursor, ParameterDirection.Output)
                 }
             );
 
@@ -91,12 +73,10 @@ namespace Inventory.Persistence.Repositories
 
         public async Task<bool> UpdateAsync(int id, Role entity)
         {
-            // TODO
             return false;
         }
         public async Task<bool> DeleteAsync(int id)
         {
-            // TODO
             return false;
         }
     }
