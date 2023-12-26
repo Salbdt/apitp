@@ -7,46 +7,39 @@ namespace Inventory.Persistence.Repositories
 {
     public class UserRepository : BaseRepository, IUserRepository
     {
-        public UserRepository()
-        {            
-        }
-
         public async Task<User?> CreateAsync(User entity)
         {
             User? user = null;
             
-            if (entity.Role is not null && entity.Name != "" && entity.Email != "" && entity.Password != "")
-            {
-                // Ejecutamos el procedimiento
-                var data = await _connection.ExecuteProcedure(
-                    spName: "proc_users_create",
-                    parameters: new List<OracleParameter>()
-                    {
-                        _connection.AddParameter("new_role_id", OracleDbType.Int32, ParameterDirection.Input, entity.Role.Id),
-                        _connection.AddParameter("new_name", OracleDbType.Varchar2, ParameterDirection.Input, entity.Name),
-                        _connection.AddParameter("new_email", OracleDbType.Varchar2, ParameterDirection.Input, entity.Email),
-                        _connection.AddParameter("new_password", OracleDbType.Varchar2, ParameterDirection.Input, entity.Password),
-                        _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
-                    }
-                );
-            
-                // Obetenemos el enumerable
-                if (data.Rows.Count > 0)
+            // Ejecutamos el procedimiento
+            var data = await _connection.ExecuteProcedure(
+                spName: "proc_users_create",
+                parameters: new List<OracleParameter>()
                 {
-                    DataRow firstRow = data.AsEnumerable().First();
-
-                    user = new User
-                    {
-                        Id          = Convert.ToInt32(firstRow["id"]),
-                        Role        = new Role
-                        {
-                            Id      = Convert.ToInt32(firstRow["role_id"]),
-                            Name    = firstRow["role_name"].ToString()
-                        },
-                        Name        = firstRow["name"].ToString(),
-                        Email       = firstRow["email"].ToString()
-                    };
+                    _connection.AddParameter("new_role_id", OracleDbType.Int32, ParameterDirection.Input, entity.Role.Id),
+                    _connection.AddParameter("new_name", OracleDbType.Varchar2, ParameterDirection.Input, entity.Name),
+                    _connection.AddParameter("new_email", OracleDbType.Varchar2, ParameterDirection.Input, entity.Email),
+                    _connection.AddParameter("new_password", OracleDbType.Varchar2, ParameterDirection.Input, entity.Password),
+                    _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
                 }
+            );
+        
+            // Obetenemos el enumerable
+            if (data.Rows.Count > 0)
+            {
+                DataRow firstRow = data.AsEnumerable().First();
+
+                user = new User
+                {
+                    Id          = Convert.ToInt32(firstRow["id"]),
+                    Role        = new Role
+                    {
+                        Id      = Convert.ToInt32(firstRow["role_id"]),
+                        Name    = firstRow["role_name"].ToString()
+                    },
+                    Name        = firstRow["name"].ToString(),
+                    Email       = firstRow["email"].ToString()
+                };
             }
 
             return user;
@@ -121,30 +114,27 @@ namespace Inventory.Persistence.Repositories
 
         public async Task<bool> UpdateAsync(int id, string email, string password, User entity)
         {
-            bool success = false;            
+            bool success = false; 
 
-            if (entity.Role is not null && email != "" && password != "")
-            {
-                // Ejecutamos el procedimiento
-                var data = await _connection.ExecuteProcedure(
-                    spName: "proc_users_update",
-                    parameters: new List<OracleParameter>()
-                    {
-                        _connection.AddParameter("user_id", OracleDbType.Int32, ParameterDirection.Input, id),
-                        _connection.AddParameter("user_email", OracleDbType.Varchar2, ParameterDirection.Input, email),
-                        _connection.AddParameter("user_password", OracleDbType.Varchar2, ParameterDirection.Input, password),
-                        _connection.AddParameter("new_role_id", OracleDbType.Int32, ParameterDirection.Input, entity.Role.Id),
-                        _connection.AddParameter("new_name", OracleDbType.Varchar2, ParameterDirection.Input, entity.Name),
-                        _connection.AddParameter("new_email", OracleDbType.Varchar2, ParameterDirection.Input, entity.Email),
-                        _connection.AddParameter("new_password", OracleDbType.Varchar2, ParameterDirection.Input, entity.Password),
-                        _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
-                    }
-                );
+            // Ejecutamos el procedimiento
+            var data = await _connection.ExecuteProcedure(
+                spName: "proc_users_update",
+                parameters: new List<OracleParameter>()
+                {
+                    _connection.AddParameter("user_id", OracleDbType.Int32, ParameterDirection.Input, id),
+                    _connection.AddParameter("user_email", OracleDbType.Varchar2, ParameterDirection.Input, email),
+                    _connection.AddParameter("user_password", OracleDbType.Varchar2, ParameterDirection.Input, password),
+                    _connection.AddParameter("new_role_id", OracleDbType.Int32, ParameterDirection.Input, entity.Role.Id),
+                    _connection.AddParameter("new_name", OracleDbType.Varchar2, ParameterDirection.Input, entity.Name),
+                    _connection.AddParameter("new_email", OracleDbType.Varchar2, ParameterDirection.Input, entity.Email),
+                    _connection.AddParameter("new_password", OracleDbType.Varchar2, ParameterDirection.Input, entity.Password),
+                    _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
+                }
+            );
 
-                // Obtenemos el enumerable
-                if (data.Rows.Count > 0)
-                    success = true;
-            }
+            // Obtenemos el enumerable
+            if (data.Rows.Count > 0)
+                success = true;
 
             return success;
         }

@@ -7,10 +7,6 @@ namespace Inventory.Persistence.Repositories
 {
     public class RoleRepository : BaseRepository, IRoleRepository
     {
-        public RoleRepository()
-        {
-        }
-
         public async Task<Role?> CreateAsync(Role entity)
         { // No implementado
             return null;

@@ -12,24 +12,38 @@ namespace Inventory.Services
         {
             _userRepository = repository;
         }
+
+        public async Task<User?> CreateAsync(User entity)
+        {
+            User? user = null;
+            if (entity.Role is not null && entity.Name != "" && entity.Email != "" && entity.Password != "")
+                user = await base.CreateAsync(entity);
+
+            return user;
+        }
         
         public async Task<bool> UpdateAsync(int id, string email, string password, User entity)
         {
-            /*
-                Los valores dentro de la entidad se actualizan.
-                Si el usuario no quiere modificar la clave y la deja vacía, esa sería su nueva clave.
-                Para eso verificamos y la completamos con la clave necesaria para actualizar.
-                Lo mismo pasa con el email.
-            */
-            if (entity.Email == "")
-                entity.Email = email;
+            bool success = false;
 
-            if (entity.Password == "")
-                entity.Password = password;
+            if (entity.Role is not null && email != "" && password != "")
+            {
+                /*
+                    Los valores dentro de la entidad se actualizan.
+                    Si el usuario no quiere modificar la clave y la deja vacía, esa sería su nueva clave.
+                    Para eso verificamos y la completamos con la clave necesaria para actualizar.
+                    Lo mismo pasa con el email.
+                */
+                if (entity.Email == "")
+                    entity.Email = email;
 
-            var item = await _userRepository.UpdateAsync(id, email, password, entity);
+                if (entity.Password == "")
+                    entity.Password = password;
 
-            return item;
+                success = await _userRepository.UpdateAsync(id, email, password, entity);
+            }
+
+            return success;
         }
     }
 }

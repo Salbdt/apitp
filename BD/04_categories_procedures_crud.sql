@@ -1,14 +1,26 @@
 -- CATEGORY CREATE
 CREATE OR REPLACE PROCEDURE proc_categories_create(
     new_name        IN categories.name%TYPE,
-    new_description IN categories.description%TYPE
+    new_description IN categories.description%TYPE,
+    v_category      OUT SYS_REFCURSOR
 )
 AS
+v_category_id   categories.id%TYPE;
 BEGIN
     INSERT INTO categories
         (id, name, description, created_at)
     VALUES
-        (0, new_name, new_description, SYSDATE);
+        (0, new_name, new_description, SYSDATE)
+    RETURNING id into v_category_id;
+        
+    OPEN v_category FOR
+        SELECT
+            id, name, description
+        FROM categories
+        WHERE
+            id = v_category_id;
+            
+    COMMIT;
 END;
 /
 
@@ -45,7 +57,8 @@ END;
 CREATE OR REPLACE PROCEDURE proc_categories_update(
     category_id         IN categories.id%TYPE,
     new_name            IN categories.name%TYPE,
-    new_description     IN categories.description%TYPE   
+    new_description     IN categories.description%TYPE,
+    v_category          OUT SYS_REFCURSOR
 )
 AS
 BEGIN
@@ -56,17 +69,36 @@ BEGIN
         updated_at  = SYSDATE
     WHERE
         id          = category_id;
+        
+    OPEN v_category FOR
+        SELECT
+            id, name, description
+        FROM categories
+        WHERE
+            id = category_id;
+    
+    COMMIT;
 END;
 /
 
 -- CATEGORY DELETE
 CREATE OR REPLACE PROCEDURE proc_categories_delete(
-    category_id IN categories.id%TYPE
+    category_id IN categories.id%TYPE,
+    v_category          OUT SYS_REFCURSOR
 )
 AS
-BEGIN
+BEGIN        
+    OPEN v_category FOR
+        SELECT
+            id, name, description
+        FROM categories
+        WHERE
+            id = category_id;
+            
     DELETE FROM categories
     WHERE
         id = category_id;
+        
+    COMMIT;
 END;
 /
