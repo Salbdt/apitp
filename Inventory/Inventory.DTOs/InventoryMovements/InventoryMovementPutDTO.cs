@@ -1,5 +1,3 @@
-using Inventory.DTOs.Products;
-using Inventory.DTOs.Users;
 using Inventory.Entities.Enums;
 
 namespace Inventory.DTOs.InventoryMovements
