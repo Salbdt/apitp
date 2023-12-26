@@ -9,12 +9,17 @@ namespace Inventory.DTOs.Users
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
+        public UserPutDTO()
+        {
+            
+        }
+
         public UserPutDTO(User user)
         {
-            Name        = user.Name;
             RoleId      = (user.Role is not null) ? user.Role.Id : 0;
+            Name        = user.Name;
             Email       = user.Email;
-            Password    = user.Password;   
+            Password    = user.Password;
         }
 
         public User ToEntity()

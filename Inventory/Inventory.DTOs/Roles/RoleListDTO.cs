@@ -8,6 +8,11 @@ namespace Inventory.DTOs.Roles
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
+        public RoleListDTO()
+        {
+            
+        }
+
         public RoleListDTO(Role role)
         {
             Id          = role.Id;

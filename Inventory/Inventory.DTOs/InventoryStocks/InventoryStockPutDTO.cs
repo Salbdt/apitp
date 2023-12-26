@@ -7,6 +7,11 @@ namespace Inventory.DTOs.InventoryStocks
         public int ProductId { get; set; }
         public int Quantity { get; set; }
 
+        public InventoryStockPutDTO()
+        {
+            
+        }
+
         public InventoryStockPutDTO(InventoryStock inventoryStock)
         {
             ProductId   = (inventoryStock.Product is not null) ? inventoryStock.Product.Id : 0;

@@ -10,10 +10,15 @@ namespace Inventory.DTOs.Users
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 
+        public UserListDTO()
+        {
+                   
+        }
+
         public UserListDTO(User user)
         {
-            Id      = user.Id;
             Role    = (user.Role is not null) ? new RoleListDTO(user.Role) : null;
+            Id      = user.Id;
             Name    = user.Name;
             Email   = user.Email;            
         }
@@ -22,8 +27,8 @@ namespace Inventory.DTOs.Users
         {
             return new User
             {
-                Id      = Id,
                 Role    = Role?.ToEntity(),
+                Id      = Id,
                 Name    = Name,
                 Email   = Email
             };

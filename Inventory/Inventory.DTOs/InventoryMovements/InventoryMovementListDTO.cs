@@ -14,6 +14,11 @@ namespace Inventory.DTOs.InventoryMovements
         public MovementType MovementType { get; set; }
         public DateTime MovementDate { get; set; }
 
+        public InventoryMovementListDTO()
+        {
+            
+        }
+
         public InventoryMovementListDTO(InventoryMovement inventoryMovement)
         {
             Id              = inventoryMovement.Id;

@@ -16,6 +16,21 @@ namespace Inventory.WebAPI.Controllers
             _userService = userService;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post(UserPutDTO userPutDTO)
+        {
+            var item = await _userService.CreateAsync(userPutDTO.ToEntity());
+
+            if (item is not null)
+            {
+                _result = Ok(new UserListDTO(item));
+            }          
+            else
+                _result = BadRequest("Resultado: Elemento no encontrado");
+
+            return _result;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

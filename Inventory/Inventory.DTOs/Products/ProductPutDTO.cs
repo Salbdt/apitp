@@ -18,6 +18,11 @@ namespace Inventory.DTOs.Products
             Price       = product.Price;                        
         }
 
+        public ProductPutDTO()
+        {
+            
+        }
+
         public Product ToEntity()
         {
             Category? category = null;

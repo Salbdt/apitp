@@ -9,6 +9,11 @@ namespace Inventory.DTOs.InventoryStocks
         public ProductListDTO? Product { get; set; }
         public int Quantity { get; set; }
 
+        public InventoryStockListDTO()
+        {
+            
+        }
+
         public InventoryStockListDTO(InventoryStock inventoryStock)
         {
             Id          = inventoryStock.Id;
