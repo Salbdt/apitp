@@ -1,8 +1,6 @@
-using Inventory.DTOs.Roles;
 using Inventory.Entities;
 using Inventory.Persistence.Interfaces;
 using Inventory.Services.Interfaces;
-using Inventory.Services.Mappers;
 
 namespace Inventory.Services
 {
@@ -15,9 +13,9 @@ namespace Inventory.Services
             _roleRepository = roleRepository;
         }
 
-        public async Task<Role>? CreateAsync(Role entity)
-        {
-            return null;
+        public async Task<Role?> CreateAsync(Role entity)
+        { // No implementado
+            return await _roleRepository.CreateAsync(entity);
         }
 
         public async Task<List<Role>> GetAllAsync()
@@ -27,21 +25,19 @@ namespace Inventory.Services
             return items.ToList();
         }
 
-        public async Task<Role>? GetByIdAsync(int id)
+        public async Task<Role?> GetByIdAsync(int id)
         {
-            Role role = await _roleRepository.GetByIdAsync(id);
-
-            return (role.Id != 0) ? role : null;
+            return await _roleRepository.GetByIdAsync(id);
         }
         
         public async Task<bool> UpdateAsync(int id, Role entity)
-        {
-            return false;
+        { // No implementado
+            return await _roleRepository.UpdateAsync(id, entity);
         }
 
         public async Task<bool> DeleteAsync(int id)
-        {
-            return false;
+        { // No implementado
+            return await _roleRepository.DeleteAsync(id);
         }
     }
 }

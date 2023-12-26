@@ -17,7 +17,7 @@ BEGIN
     
     OPEN v_user FOR
         SELECT
-            u.id, u.role_id, r.name as role_name, u.name, u.email
+            u.id, u.role_id, r.name as role_name, r.description as role_description, u.name, u.email
         FROM users u
             INNER JOIN roles r ON u.role_id = r.id
         WHERE
@@ -35,7 +35,7 @@ AS
 BEGIN
     OPEN v_users FOR
         SELECT
-            u.id, u.role_id, r.name as role_name, u.name, u.email
+            u.id, u.role_id, r.name as role_name, r.description as role_description, u.name, u.email
         FROM users u
             INNER JOIN roles r ON u.role_id = r.id;
 END;
@@ -50,7 +50,7 @@ AS
 BEGIN
     OPEN v_user FOR
         SELECT
-            u.id, u.role_id, r.name as role_name, u.name, u.email
+            u.id, u.role_id, r.name as role_name, r.description as role_description, u.name, u.email
         FROM users u
             INNER JOIN roles r ON u.role_id = r.id
         WHERE
@@ -61,12 +61,13 @@ END;
 -- USERS UPDATE
 CREATE OR REPLACE PROCEDURE proc_users_update(
     user_id         in users.id%TYPE,
-    new_role_id      in users.role_id%TYPE,
+    user_email      in users.email%TYPE,
+    user_password   in users.password%TYPE,
+    new_role_id     in users.role_id%TYPE,
     new_name        in users.name%TYPE,
     new_email       in users.email%TYPE,
     new_password    in users.password%TYPE,
-    user_email      in users.email%TYPE,
-    user_password   in users.password%TYPE    
+    v_user          OUT SYS_REFCURSOR
 )
 AS
 BEGIN
@@ -83,6 +84,17 @@ BEGIN
         email       = user_email
     AND
         password    = STANDARD_HASH(user_password, 'SHA512');
+
+    OPEN v_user FOR
+        SELECT
+            id
+        FROM users
+        WHERE
+            id          = user_id
+        AND
+            name        = new_name
+        AND
+            password    = STANDARD_HASH(new_password, 'SHA512');
         
     COMMIT;
 END;
@@ -90,10 +102,18 @@ END;
 
 -- USERS DELETE
 CREATE OR REPLACE PROCEDURE proc_users_delete(
-    user_id IN users.id%TYPE
+    user_id IN users.id%TYPE,
+    v_user  OUT SYS_REFCURSOR
 )
 AS
 BEGIN
+    OPEN v_user FOR
+        SELECT
+            id
+        FROM users
+        WHERE
+            id  = user_id;
+
     DELETE FROM users
     WHERE
         id = user_id;

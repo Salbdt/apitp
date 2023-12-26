@@ -9,38 +9,44 @@ namespace Inventory.WebAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : BaseController<User>
     {
-        public UserController(UserService service) : base(service)
-        {            
+        private readonly UserService _userService;
+
+        public UserController(UserService userService)
+        {
+            _userService = userService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post(UserPutDTO userCreateDTO)
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            /*
-            // var categoryToCreate = new Category
-            // {
-            //     Name = categoryToCreateDTO.Name,
-            //     Description = categoryToCreateDTO.Description,
-            //     CreatedAt = DateTime.Now
-            // };
-            var categoryToCreate = _mapper.Map<Category>(categoryToCreateDTO);
-            categoryToCreate.CreatedAt = DateTime.Now;
+            List<UserListDTO> userListDTOs = new List<UserListDTO>();
 
-            var categoryCreated = await _categoryRepository.AddAsync(categoryToCreate);
+            var items = await _userService.GetAllAsync();
 
-            // var categoryCreatedDTO = new CategoryToListDTO
-            // {
-            //     Id = categoryCreated.Id,
-            //     Name = categoryCreated.Name,
-            //     Description = categoryCreated.Description,
-            //     CreatedAt = categoryCreated.CreatedAt,
-            //     UpdatedAt = categoryCreated.UpdatedAt
-            // };
-            var categoryCreatedDTO = _mapper.Map<CategoryToListDTO>(categoryCreated);
+            if (items.Count > 0)
+            {
+                foreach (var item in items)
+                    userListDTOs.Add(new UserListDTO(item));
 
-            return Ok(categoryCreatedDTO);
-            */
-            return null;
+                _result = Ok(userListDTOs);
+            }          
+            else
+                _result = NotFound("Resultado de la búsqueda: No se encontraron elementos");
+
+            return _result;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var item = await _userService.GetByIdAsync(id);
+
+            if (item is not null)
+                _result = Ok(new UserListDTO(item));       
+            else
+                _result = NotFound("Resultado de la búsqueda: Elemento no encontrado");
+
+            return _result;
         }
     }
 }
