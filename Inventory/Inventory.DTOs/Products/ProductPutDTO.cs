@@ -10,17 +10,17 @@ namespace Inventory.DTOs.Products
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
 
-        public ProductPutDTO(Product product)
-        {
-            CategoryId    = (product.Category is not null) ? product.Category.Id : 0;
-            Name        = product.Name;
-            Description = product.Description;
-            Price       = product.Price;                        
-        }
-
         public ProductPutDTO()
         {
             
+        }
+
+        public ProductPutDTO(Product product)
+        {
+            CategoryId  = (product.Category is not null) ? product.Category.Id : 0;
+            Name        = product.Name;
+            Description = product.Description;
+            Price       = product.Price;                        
         }
 
         public Product ToEntity()

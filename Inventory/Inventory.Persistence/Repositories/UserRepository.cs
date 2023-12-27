@@ -31,14 +31,15 @@ namespace Inventory.Persistence.Repositories
 
                 user = new User
                 {
-                    Id          = Convert.ToInt32(firstRow["id"]),
-                    Role        = new Role
+                    Id              = Convert.ToInt32(firstRow["id"]),
+                    Role            = new Role
                     {
-                        Id      = Convert.ToInt32(firstRow["role_id"]),
-                        Name    = firstRow["role_name"].ToString()
+                        Id          = Convert.ToInt32(firstRow["role_id"]),
+                        Name        = firstRow["role_name"].ToString(),
+                        Description = firstRow["role_description"].ToString()
                     },
-                    Name        = firstRow["name"].ToString(),
-                    Email       = firstRow["email"].ToString()
+                    Name            = firstRow["name"].ToString(),
+                    Email           = firstRow["email"].ToString()
                 };
             }
 
@@ -62,14 +63,15 @@ namespace Inventory.Persistence.Repositories
             result = data.AsEnumerable().Select(
                 row => new User
                 {
-                    Id = Convert.ToInt32(row["id"]),
-                    Role = new Role
+                    Id              = Convert.ToInt32(row["id"]),
+                    Role            = new Role
                     {
-                        Id = Convert.ToInt32(row["role_id"]),
-                        Name = row["role_name"].ToString()
+                        Id          = Convert.ToInt32(row["role_id"]),
+                        Name        = row["role_name"].ToString(),
+                        Description = row["role_description"].ToString()
                     },
-                    Name = row["name"].ToString(),
-                    Email = row["email"].ToString()
+                    Name            = row["name"].ToString(),
+                    Email           = row["email"].ToString()
                 }
             );
 

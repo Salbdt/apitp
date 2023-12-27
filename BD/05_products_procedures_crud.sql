@@ -13,11 +13,13 @@ BEGIN
         (id, category_id, name, description, price, created_at)
     VALUES
         (0, new_category_id, new_name, new_description, new_price, SYSDATE)
-    RETURNING id into v_product_id;       
+    RETURNING id into v_product_id;
+    
+    proc_inventory_stocks_create(v_product_id, 0);
     
     OPEN v_product FOR
         SELECT
-            p.id, p.category_id, c.name as category_name, p.name, p.description, p.price
+            p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
         FROM products p
             INNER JOIN categories c ON p.category_id = c.id
         WHERE
@@ -35,7 +37,7 @@ AS
 BEGIN
     OPEN v_products FOR
         SELECT
-            p.id, p.category_id, c.name as category_name, p.name, p.description, p.price
+            p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
         FROM products p
             INNER JOIN categories c ON p.category_id = c.id;
 END;
@@ -44,13 +46,13 @@ END;
 -- PRODUCTS GET BY ID
 CREATE OR REPLACE PROCEDURE proc_products_get_by_id(
     product_id  IN products.id%TYPE,
-    v_products  OUT SYS_REFCURSOR
+    v_product  OUT SYS_REFCURSOR
 )
 AS
 BEGIN
-    OPEN v_products FOR
+    OPEN v_product FOR
         SELECT
-            p.id, p.category_id, c.name as category_name, p.name, p.description, p.price
+            p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
         FROM products p
             INNER JOIN categories c ON p.category_id = c.id
         WHERE

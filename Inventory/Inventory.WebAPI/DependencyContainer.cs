@@ -21,6 +21,7 @@ using Oracle.ManagedDataAccess.Client;
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             
             return services;
         }
@@ -30,6 +31,7 @@ using Oracle.ManagedDataAccess.Client;
             services.AddScoped<RoleService>();
             services.AddScoped<UserService>();
             services.AddScoped<CategoryService>();
+            services.AddScoped<ProductService>();
             
             return services;
         }
