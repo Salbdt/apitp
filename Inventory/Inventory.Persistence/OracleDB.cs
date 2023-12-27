@@ -29,13 +29,11 @@ namespace Inventory.Persistence
             OracleCommand command = CreateCommand(spName, CommandType.StoredProcedure);
 
             foreach (OracleParameter parameter in parameters)
-            {
                 command.Parameters.Add(parameter);
-            }
 
             try
             {                
-                _connection.Open();
+                await _connection.OpenAsync();
                 data.Load(await command.ExecuteReaderAsync());
             }
             catch(Exception ex)
@@ -50,6 +48,33 @@ namespace Inventory.Persistence
             return data;
         }
 
+        public async Task<int> ExecuteScalarProcedure(string spName, List<OracleParameter> parameters)
+        {
+            int filasAfectadas = 0;
+
+            OracleCommand command = CreateCommand(spName, CommandType.StoredProcedure);
+
+            foreach (OracleParameter parameter in parameters)
+                command.Parameters.Add(parameter);
+
+            try
+            {                
+                await _connection.OpenAsync();
+                await command.ExecuteNonQueryAsync();
+                filasAfectadas = Convert.ToInt32(command.Parameters["v_result"].Value.ToString());
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return filasAfectadas;
+        }
+
         public async Task<long> RunScalarQuery(string query)
         {
             long scalar = 0;
@@ -58,7 +83,7 @@ namespace Inventory.Persistence
 
             try
             {                
-                _connection.Open();
+                await _connection.OpenAsync();
                 scalar = Convert.ToInt64(await command.ExecuteScalarAsync());
             }
             catch(Exception ex)
@@ -81,7 +106,7 @@ namespace Inventory.Persistence
 
             try
             {                
-                _connection.Open();
+                await _connection.OpenAsync();
                 data.Load(await command.ExecuteReaderAsync());
             }
             catch(Exception ex)

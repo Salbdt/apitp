@@ -1,4 +1,4 @@
-using Inventory.DTOs.Categories;
+using Inventory.DTOs.Products;
 using Inventory.Entities;
 using Inventory.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -7,24 +7,24 @@ namespace Inventory.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoryController : BaseController<Category>
+    public class ProductController : BaseController<Product>
     {
-        private readonly CategoryService _categoryService;
+        private readonly ProductService _productService;
 
-        public CategoryController(CategoryService categoryService)
+        public ProductController(ProductService productService)
         {
-            _categoryService = categoryService;
+            _productService = productService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CategoryPutDTO categoryPutDTO)
+        public async Task<IActionResult> Post(ProductPutDTO productPutDTO)
         {
-            var item = await _categoryService.CreateAsync(categoryPutDTO.ToEntity());
+            var item = await _productService.CreateAsync(productPutDTO.ToEntity());
 
             if (item is null)
                 _result = BadRequest("Resultado de la inserción: Item no creado");       
             else
-                _result = Ok(new CategoryListDTO(item));
+                _result = Ok(new ProductListDTO(item));
                 
 
             return _result;
@@ -33,18 +33,18 @@ namespace Inventory.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            List<CategoryListDTO> categoryListDTOs = new List<CategoryListDTO>();
+            List<ProductListDTO> productListDTOs = new List<ProductListDTO>();
 
-            var items = await _categoryService.GetAllAsync();
+            var items = await _productService.GetAllAsync();
 
             if (items.Count == 0)
                 _result = NotFound("Resultado de la búsqueda: No se encontraron items");
             else
             {
                 foreach (var item in items)
-                    categoryListDTOs.Add(new CategoryListDTO(item));
+                    productListDTOs.Add(new ProductListDTO(item));
 
-                _result = Ok(categoryListDTOs);
+                _result = Ok(productListDTOs);
             }
 
             return _result;
@@ -53,20 +53,20 @@ namespace Inventory.WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var item = await _categoryService.GetByIdAsync(id);
+            var item = await _productService.GetByIdAsync(id);
 
             if (item is null)
                 _result = NotFound("Resultado de la búsqueda: Item no encontrado");
             else
-                _result = Ok(new CategoryListDTO(item));
+                _result = Ok(new ProductListDTO(item));
 
             return _result;
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, CategoryPutDTO categoryPutDTO)
+        public async Task<IActionResult> Update(int id, ProductPutDTO productPutDTO)
         {
-            var item = await _categoryService.UpdateAsync(id, categoryPutDTO.ToEntity());
+            var item = await _productService.UpdateAsync(id, productPutDTO.ToEntity());
 
             if (!item)
                 _result = BadRequest($"Resultado de la actualización: Item no encontrado");
@@ -79,7 +79,7 @@ namespace Inventory.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var item = await _categoryService.DeleteAsync(id);
+            var item = await _productService.DeleteAsync(id);
 
             if (!item)
                 _result = BadRequest("Resultado de la eliminación: Item no eliminado");

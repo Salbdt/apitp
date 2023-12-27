@@ -7,18 +7,14 @@ CREATE OR REPLACE PROCEDURE proc_categories_create(
 AS
 v_category_id   categories.id%TYPE;
 BEGIN
-    INSERT INTO categories
-        (id, name, description, created_at)
-    VALUES
-        (0, new_name, new_description, SYSDATE)
+    INSERT INTO categories (id, name, description, created_at)
+    VALUES (0, new_name, new_description, SYSDATE)
     RETURNING id into v_category_id;
         
     OPEN v_category FOR
-        SELECT
-            id, name, description
+        SELECT id, name, description
         FROM categories
-        WHERE
-            id = v_category_id;
+        WHERE id = v_category_id;
             
     COMMIT;
 END;
@@ -31,8 +27,7 @@ CREATE OR REPLACE PROCEDURE proc_categories_get_all(
 AS
 BEGIN
     OPEN v_categories FOR
-        SELECT
-            id, name, description
+        SELECT id, name, description
         FROM categories;
 END;
 /
@@ -45,11 +40,9 @@ CREATE OR REPLACE PROCEDURE proc_categories_get_by_id(
 AS
 BEGIN
     OPEN v_categories FOR
-        SELECT
-            id, name, description
+        SELECT id, name, description
         FROM categories
-        WHERE
-            id = category_id;
+        WHERE id = category_id;
 END;
 /
 
@@ -58,28 +51,17 @@ CREATE OR REPLACE PROCEDURE proc_categories_update(
     category_id         IN categories.id%TYPE,
     new_name            IN categories.name%TYPE,
     new_description     IN categories.description%TYPE,
-    v_category          OUT SYS_REFCURSOR
+    v_result            OUT NUMBER
 )
 AS
-v_updated_at        categories.updated_at%TYPE;
 BEGIN
-    UPDATE categories
-    SET
+    UPDATE categories SET
         name        = new_name,
         description = new_description,
         updated_at  = SYSDATE
-    WHERE
-        id          = category_id
-    RETURNING updated_at into v_updated_at;
+    WHERE id        = category_id;
         
-    OPEN v_category FOR
-        SELECT
-            id
-        FROM categories
-        WHERE
-            id          = category_id
-        AND
-            updated_at  = v_updated_at;
+    v_result := SQL%ROWCOUNT;
     
     COMMIT;
 END;
@@ -87,21 +69,17 @@ END;
 
 -- CATEGORY DELETE
 CREATE OR REPLACE PROCEDURE proc_categories_delete(
-    category_id IN categories.id%TYPE,
-    v_category          OUT SYS_REFCURSOR
+    category_id_to_delete   IN categories.id%TYPE,
+    v_result                OUT NUMBER
 )
 AS
-BEGIN        
-    OPEN v_category FOR
-        SELECT
-            id
-        FROM categories
-        WHERE
-            id = category_id;
-            
+v_id    NUMBER;
+v_count NUMBER;
+BEGIN
     DELETE FROM categories
-    WHERE
-        id = category_id;
+    WHERE id = category_id_to_delete;
+    
+    v_result := SQL%ROWCOUNT;
         
     COMMIT;
 END;

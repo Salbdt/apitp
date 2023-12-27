@@ -9,21 +9,16 @@ CREATE OR REPLACE PROCEDURE proc_products_create(
 AS
 v_product_id   products.id%TYPE;
 BEGIN
-    INSERT INTO products
-        (id, category_id, name, description, price, created_at)
-    VALUES
-        (0, new_category_id, new_name, new_description, new_price, SYSDATE)
+    INSERT INTO products (id, category_id, name, description, price, created_at)
+    VALUES (0, new_category_id, new_name, new_description, new_price, SYSDATE)
     RETURNING id into v_product_id;
     
     proc_inventory_stocks_create(v_product_id, 0);
     
     OPEN v_product FOR
-        SELECT
-            p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
-        FROM products p
-            INNER JOIN categories c ON p.category_id = c.id
-        WHERE
-            p.id = v_product_id;
+        SELECT p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
+        FROM products p INNER JOIN categories c ON p.category_id = c.id
+        WHERE p.id = v_product_id;
             
     COMMIT;
 END;
@@ -36,10 +31,8 @@ CREATE OR REPLACE PROCEDURE proc_products_get_all(
 AS
 BEGIN
     OPEN v_products FOR
-        SELECT
-            p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
-        FROM products p
-            INNER JOIN categories c ON p.category_id = c.id;
+        SELECT p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
+        FROM products p INNER JOIN categories c ON p.category_id = c.id;
 END;
 /
 
@@ -51,12 +44,9 @@ CREATE OR REPLACE PROCEDURE proc_products_get_by_id(
 AS
 BEGIN
     OPEN v_product FOR
-        SELECT
-            p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
-        FROM products p
-            INNER JOIN categories c ON p.category_id = c.id
-        WHERE
-            p.id = product_id;
+        SELECT p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
+        FROM products p INNER JOIN categories c ON p.category_id = c.id
+        WHERE p.id = product_id;
 END;
 /
 
@@ -67,30 +57,19 @@ CREATE OR REPLACE PROCEDURE proc_products_update(
     new_name        IN products.name%TYPE,
     new_description IN products.description%TYPE,
     new_price       IN products.price%TYPE,
-    v_product       OUT SYS_REFCURSOR
+    v_result        OUT NUMBER
 )
 AS
-v_updated_at        products.updated_at%TYPE;
 BEGIN
-    UPDATE products
-    SET
+    UPDATE products SET
         category_id = new_category_id,
         name        = new_name,
         description = new_description,
         price       = new_price,
         updated_at  = SYSDATE
-    WHERE
-        id          = product_id
-    RETURNING updated_at into v_updated_at;
+    WHERE id        = product_id;
 
-    OPEN v_product FOR
-        SELECT
-            id
-        FROM products
-        WHERE
-            id          = product_id
-        AND
-            updated_at  = v_updated_at;
+    v_result := SQL%ROWCOUNT;
         
     COMMIT; 
 END;
@@ -98,21 +77,17 @@ END;
 
 -- PRODUCTS DELETE
 CREATE OR REPLACE PROCEDURE proc_products_delete(
-    product_id  IN products.id%TYPE,
-    v_product   OUT SYS_REFCURSOR
+    product_id_to_delete    IN products.id%TYPE,
+    v_result                OUT NUMBER
 )
 AS
-BEGIN
-    OPEN v_product FOR
-        SELECT
-            id
-        FROM products
-        WHERE
-            id  = product_id;
-            
+BEGIN    
+    proc_inventory_stocks_delete(product_id_to_delete, v_result);
+    
     DELETE FROM products
-    WHERE
-        id = product_id;
+    WHERE id = product_id_to_delete;
+
+    v_result := SQL%ROWCOUNT;
         
     COMMIT;
 END;

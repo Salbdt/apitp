@@ -119,7 +119,7 @@ namespace Inventory.Persistence.Repositories
             bool success = false; 
 
             // Ejecutamos el procedimiento
-            var data = await _connection.ExecuteProcedure(
+            var data = await _connection.ExecuteScalarProcedure(
                 spName: "proc_users_update",
                 parameters: new List<OracleParameter>()
                 {
@@ -133,10 +133,13 @@ namespace Inventory.Persistence.Repositories
                     _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
                 }
             );
-
-            // Obtenemos el enumerable
-            if (data.Rows.Count > 0)
+            
+            // Obtenemos el valor
+            if (data == 1 || data == 2)
+            {
                 success = true;
+                Console.WriteLine($"Data: {data}");
+            }
 
             return success;
         }
@@ -151,17 +154,17 @@ namespace Inventory.Persistence.Repositories
             bool success = false;   
 
             // Ejecutamos el procedimiento
-            var data = await _connection.ExecuteProcedure(
+            var data = await _connection.ExecuteScalarProcedure(
                 spName: "proc_users_delete",
                 parameters: new List<OracleParameter>()
                 {
                     _connection.AddParameter("user_id", OracleDbType.Int32, ParameterDirection.Input, id),
-                    _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
+                    _connection.AddParameter("v_result", OracleDbType.Int32, ParameterDirection.Output)
                 }
             );
 
-            // Obtenemos el enumerable
-            if (data.Rows.Count > 0)
+            // Obtenemos el valor
+            if (data == 1)
                 success = true;
 
             return success;

@@ -5,8 +5,7 @@ CREATE OR REPLACE PROCEDURE proc_roles_get_all(
 AS
 BEGIN
     OPEN v_roles FOR
-        SELECT
-            id, name, description
+        SELECT id, name, description
         FROM roles;
 END;
 /
@@ -19,10 +18,8 @@ create or replace procedure proc_roles_get_by_id(
 as
 begin
     OPEN v_role FOR
-        SELECT
-            id, name, description
+        SELECT id, name, description
         FROM roles
-        WHERE
-            id = role_id;
+        WHERE id = role_id;
 end;
 /

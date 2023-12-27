@@ -144,21 +144,24 @@ namespace Inventory.Persistence.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            bool success = false;   
+            bool success = false;            
 
             // Ejecutamos el procedimiento
             var data = await _connection.ExecuteProcedure(
                 spName: "proc_products_delete",
                 parameters: new List<OracleParameter>()
                 {
-                    _connection.AddParameter("product_id", OracleDbType.Int32, ParameterDirection.Input, id),
-                    _connection.AddParameter("v_product", OracleDbType.RefCursor, ParameterDirection.Output)
+                    _connection.AddParameter("product_id_to_delete", OracleDbType.Int32, ParameterDirection.Input, id),
+                    _connection.AddParameter("v_result", OracleDbType.RefCursor, ParameterDirection.Output)
                 }
             );
 
             // Obtenemos el enumerable
             if (data.Rows.Count > 0)
-                success = true;
+            {
+                DataRow firstRow = data.AsEnumerable().First();               
+                success = Convert.ToBoolean(firstRow["result"]);
+            }
 
             return success;
         }        
