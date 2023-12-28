@@ -56,13 +56,11 @@ namespace Inventory.Persistence.Repositories
             // Obtenemos la entidad
             if (data.Rows.Count > 0)
             {
-                DataRow firstRow = data.AsEnumerable().First();
-
                 role = new Role
                 {
-                    Id             = Convert.ToInt32(firstRow["id"]),
-                    Name           = firstRow["name"].ToString(),
-                    Description    = firstRow["description"].ToString(),
+                    Id             = Convert.ToInt32(data.Rows[0]["id"]),
+                    Name           = data.Rows[0]["name"].ToString(),
+                    Description    = data.Rows[0]["description"].ToString(),
                 };
             }
 

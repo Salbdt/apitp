@@ -27,19 +27,17 @@ namespace Inventory.Persistence.Repositories
             // Obetenemos el enumerable
             if (data.Rows.Count > 0)
             {
-                DataRow firstRow = data.AsEnumerable().First();
-
                 user = new User
                 {
-                    Id              = Convert.ToInt32(firstRow["id"]),
+                    Id              = Convert.ToInt32(data.Rows[0]["id"]),
                     Role            = new Role
                     {
-                        Id          = Convert.ToInt32(firstRow["role_id"]),
-                        Name        = firstRow["role_name"].ToString(),
-                        Description = firstRow["role_description"].ToString()
+                        Id          = Convert.ToInt32(data.Rows[0]["role_id"]),
+                        Name        = data.Rows[0]["role_name"].ToString(),
+                        Description = data.Rows[0]["role_description"].ToString()
                     },
-                    Name            = firstRow["name"].ToString(),
-                    Email           = firstRow["email"].ToString()
+                    Name            = data.Rows[0]["name"].ToString(),
+                    Email           = data.Rows[0]["email"].ToString()
                 };
             }
 
@@ -96,19 +94,17 @@ namespace Inventory.Persistence.Repositories
             // Obtenemos la entidad
             if (data.Rows.Count > 0)
             {
-                DataRow firstRow = data.AsEnumerable().First();
-
                 user = new User
                 {
-                    Id              = Convert.ToInt32(firstRow["id"]),
+                    Id              = Convert.ToInt32(data.Rows[0]["id"]),
                     Role            = new Role
                     {
-                        Id          = Convert.ToInt32(firstRow["role_id"]),
-                        Name        = firstRow["role_name"].ToString(),
-                        Description = firstRow["role_description"].ToString()
+                        Id          = Convert.ToInt32(data.Rows[0]["role_id"]),
+                        Name        = data.Rows[0]["role_name"].ToString(),
+                        Description = data.Rows[0]["role_description"].ToString()
                     },
-                    Name            = firstRow["name"].ToString(),
-                    Email           = firstRow["email"].ToString()
+                    Name            = data.Rows[0]["name"].ToString(),
+                    Email           = data.Rows[0]["email"].ToString()
                 };
             }
 

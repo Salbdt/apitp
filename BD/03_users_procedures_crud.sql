@@ -64,11 +64,11 @@ BEGIN
     UPDATE users SET
         role_id     = new_role_id,
         name        = new_name,
-        email       = new_email,
+        email       = LOWER(new_email),
         password    = STANDARD_HASH(new_password, 'SHA512'),
         updated_at  = SYSDATE
     WHERE id        = user_id
-    AND email       = user_email
+    AND email       = LOWER(user_email)
     AND password    = STANDARD_HASH(user_password, 'SHA512');
 
     v_result := SQL%ROWCOUNT;

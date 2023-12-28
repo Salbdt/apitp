@@ -27,20 +27,18 @@ namespace Inventory.Persistence.Repositories
             // Obetenemos el enumerable
             if (data.Rows.Count > 0)
             {
-                DataRow firstRow = data.AsEnumerable().First();
-
                 product = new Product
                 {
-                    Id              = Convert.ToInt32(firstRow["id"]),
+                    Id              = Convert.ToInt32(data.Rows[0]["id"]),
                     Category        = new Category
                     {
-                        Id          = Convert.ToInt32(firstRow["category_id"]),
-                        Name        = firstRow["category_name"].ToString(),
-                        Description = firstRow["category_description"].ToString()
+                        Id          = Convert.ToInt32(data.Rows[0]["category_id"]),
+                        Name        = data.Rows[0]["category_name"].ToString(),
+                        Description = data.Rows[0]["category_description"].ToString()
                     },
-                    Name            = firstRow["name"].ToString(),
-                    Description     = firstRow["description"].ToString(),
-                    Price           = Convert.ToDecimal(firstRow["price"])
+                    Name            = data.Rows[0]["name"].ToString(),
+                    Description     = data.Rows[0]["description"].ToString(),
+                    Price           = Convert.ToDecimal(data.Rows[0]["price"])
                 };
             }
 
@@ -98,20 +96,18 @@ namespace Inventory.Persistence.Repositories
             // Obtenemos la entidad
             if (data.Rows.Count > 0)
             {
-                DataRow firstRow = data.AsEnumerable().First();
-
                 product = new Product
                 {
-                    Id              = Convert.ToInt32(firstRow["id"]),
+                    Id              = Convert.ToInt32(data.Rows[0]["id"]),
                     Category        = new Category
                     {
-                        Id          = Convert.ToInt32(firstRow["category_id"]),
-                        Name        = firstRow["category_name"].ToString(),
-                        Description = firstRow["category_description"].ToString()
+                        Id          = Convert.ToInt32(data.Rows[0]["category_id"]),
+                        Name        = data.Rows[0]["category_name"].ToString(),
+                        Description = data.Rows[0]["category_description"].ToString()
                     },
-                    Name            = firstRow["name"].ToString(),
-                    Description     = firstRow["description"].ToString(),
-                    Price           = Convert.ToDecimal(firstRow["price"])
+                    Name            = data.Rows[0]["name"].ToString(),
+                    Description     = data.Rows[0]["description"].ToString(),
+                    Price           = Convert.ToDecimal(data.Rows[0]["price"])
                 };
             }
 

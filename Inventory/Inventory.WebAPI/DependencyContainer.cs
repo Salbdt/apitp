@@ -1,21 +1,10 @@
 using Inventory.Persistence.Interfaces;
 using Inventory.Persistence.Repositories;
 using Inventory.Services;
-using Oracle.ManagedDataAccess.Client;
+using Inventory.Services.Interfaces;
 
     public static class DependencyContainer
     {
-        /*
-        public static IServiceCollection AddOracleConnection(
-            this IServiceCollection services,
-            string connectionString
-        )
-        {
-            services.AddScoped<OracleConnection>(new OracleConnection(connectionString));
-            return services;
-        }
-        */
-
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IRoleRepository, RoleRepository>();
@@ -23,6 +12,7 @@ using Oracle.ManagedDataAccess.Client;
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IInventoryStockRepository, InventoryStockRepository>();
+            services.AddScoped<IInventoryMovementRepository, InventoryMovementRepository>();
             
             return services;
         }
@@ -34,6 +24,7 @@ using Oracle.ManagedDataAccess.Client;
             services.AddScoped<CategoryService>();
             services.AddScoped<ProductService>();
             services.AddScoped<InventoryStockService>();
+            services.AddScoped<IInventoryMovementService>();
             
             return services;
         }

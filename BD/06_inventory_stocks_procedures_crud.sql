@@ -12,7 +12,7 @@ BEGIN
     RETURNING id INTO v_inventory_stock_id;
     
     OPEN v_inventory_stock FOR
-        SELECT ist.id, ist.product_id, p.name as product_name, ist.quantity        
+        SELECT ist.id, ist.product_id, p.name as product_name, p.description as product_description, ist.quantity        
         FROM inventory_stocks ist INNER JOIN products p ON ist.product_id = p.id
         WHERE ist.id = v_inventory_stock_id;
         
@@ -27,7 +27,7 @@ CREATE OR REPLACE PROCEDURE proc_inventory_stocks_get_all(
 AS
 BEGIN
     OPEN v_inventory_stocks FOR
-        SELECT ist.id, ist.product_id, p.name as product_name, ist.quantity        
+        SELECT ist.id, ist.product_id, p.name as product_name, p.description as product_description, ist.quantity        
         FROM inventory_stocks ist INNER JOIN products p ON ist.product_id = p.id;
 END;
 /
@@ -40,7 +40,7 @@ CREATE OR REPLACE PROCEDURE proc_inventory_stocks_get_by_product_id(
 AS
 BEGIN
     OPEN v_inventory_stock FOR
-        SELECT ist.id, ist.product_id, p.name as product_name, ist.quantity        
+        SELECT ist.id, ist.product_id, p.name as product_name, p.description as product_description, ist.quantity        
         FROM inventory_stocks ist INNER JOIN products p ON ist.product_id = p.id
         WHERE ist.product_id = product_id_to_get;
 END;

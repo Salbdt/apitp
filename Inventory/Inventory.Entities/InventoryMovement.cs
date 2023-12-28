@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Inventory.Entities.Enums;
 
 namespace Inventory.Entities
@@ -14,5 +10,16 @@ namespace Inventory.Entities
         public int Quantity { get; set; }
         public MovementType MovementType { get; set; }
         public DateTime MovementDate { get; set; }
+
+        public static MovementType GetMovementType(string movementTypeText)
+        {
+            MovementType movementType = MovementType.INGRESO;
+            if (movementTypeText.Equals("INGRESO"))
+                movementType = MovementType.INGRESO;
+            else if (movementTypeText.Equals("EGRESO"))
+                movementType = MovementType.EGRESO;
+
+            return movementType;
+        }
     }
 }
