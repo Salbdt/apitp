@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "3dc51c86-0229-4c5b-9d3e-b925671cff30",
+		"name": "APITP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23822195"
+	},
+	"item": [
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Roles GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/Role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Roles GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/Role/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Role",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"roleId\": 1,\r\n  \"name\": \"Admin\",\r\n  \"email\": \"admin@mail.com\",\r\n  \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/User/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"User",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roleId\": 1,\r\n    \"name\": \"Sal\",\r\n    \"email\": \"sal@mail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/User/1;admin@mail.com;123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"User",
+								"1;admin@mail.com;123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/User/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"User",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Category Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Gabinete\",\r\n  \"description\": \"Gabinetes de computadora\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/Category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/Category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/Category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Periféricos\",\r\n    \"description\": \"Periféricos de computadora\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/Category/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Category",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/Category/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Category",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Product Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": \"2\",\r\n    \"name\": \"Intel Pentium\",\r\n    \"description\": \"Procesador barato marca Intel\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/Product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/Product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5037/api/Product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": \"1\",\r\n    \"name\": \"Intel I3\",\r\n    \"description\": \"Procesador marca Intel\",\r\n    \"price\": 180\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/Product/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Product",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5037/api/Product/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5037",
+							"path": [
+								"api",
+								"Product",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
