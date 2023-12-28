@@ -39,7 +39,7 @@ BEGIN
         FROM inventory_movements im
             INNER JOIN products p ON im.product_id = p.id
             INNER JOIN users u ON im.user_id = u.id
-        WHERE im.id = inventory_movement_id;
+        WHERE im.id = v_inventory_movement_id;
         
     COMMIT;
 END;

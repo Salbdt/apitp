@@ -33,16 +33,16 @@ END;
 /
 
 -- INVENTORY STOCKS GET BY ID
-CREATE OR REPLACE PROCEDURE proc_inventory_stocks_get_by_id(
-    inventory_stock_id  IN inventory_stocks.id%TYPE,
-    v_inventory_stock  OUT SYS_REFCURSOR
+CREATE OR REPLACE PROCEDURE proc_inventory_stocks_get_by_product_id(
+    product_id_to_get   IN inventory_stocks.product_id%TYPE,
+    v_inventory_stock   OUT SYS_REFCURSOR
 )
 AS
 BEGIN
     OPEN v_inventory_stock FOR
         SELECT ist.id, ist.product_id, p.name as product_name, ist.quantity        
         FROM inventory_stocks ist INNER JOIN products p ON ist.product_id = p.id
-        WHERE ist.id = inventory_stock_id;
+        WHERE ist.product_id = product_id_to_get;
 END;
 /
 

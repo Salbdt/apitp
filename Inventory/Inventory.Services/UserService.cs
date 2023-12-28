@@ -13,7 +13,7 @@ namespace Inventory.Services
             _userRepository = repository;
         }
 
-        public async Task<User?> CreateAsync(User entity)
+        public new async Task<User?> CreateAsync(User entity)
         {
             User? user = null;
             if (entity.Role is not null && entity.Name != "" && entity.Email != "" && entity.Password != "")

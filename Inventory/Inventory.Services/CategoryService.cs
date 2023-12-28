@@ -13,7 +13,7 @@ namespace Inventory.Services
             _categoryRepository = repository;
         }
 
-        public async Task<Category?> CreateAsync(Category entity)
+        public new async Task<Category?> CreateAsync(Category entity)
         {
             Category? category = null;
             if (entity.Name != "")

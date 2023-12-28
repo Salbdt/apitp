@@ -22,6 +22,7 @@ using Oracle.ManagedDataAccess.Client;
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IInventoryStockRepository, InventoryStockRepository>();
             
             return services;
         }
@@ -32,6 +33,7 @@ using Oracle.ManagedDataAccess.Client;
             services.AddScoped<UserService>();
             services.AddScoped<CategoryService>();
             services.AddScoped<ProductService>();
+            services.AddScoped<InventoryStockService>();
             
             return services;
         }

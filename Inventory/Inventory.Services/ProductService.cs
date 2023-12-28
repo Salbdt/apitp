@@ -13,10 +13,10 @@ namespace Inventory.Services
             _productRepository = repository;
         }
 
-        public async Task<Product?> CreateAsync(Product entity)
+        public new async Task<Product?> CreateAsync(Product entity)
         {
             Product? product = null;
-            if (entity.Category is null || entity.Category.Id == 0 || entity.Name != "")
+            if (entity.Category is not null && entity.Category.Id != 0 && entity.Name != "")
                 product = await base.CreateAsync(entity);
 
             return product;

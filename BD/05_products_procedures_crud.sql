@@ -7,13 +7,13 @@ CREATE OR REPLACE PROCEDURE proc_products_create(
     v_product       OUT SYS_REFCURSOR
 )
 AS
-v_product_id   products.id%TYPE;
+v_product_id    products.id%TYPE;
 BEGIN
     INSERT INTO products (id, category_id, name, description, price, created_at)
     VALUES (0, new_category_id, new_name, new_description, new_price, SYSDATE)
     RETURNING id into v_product_id;
     
-    proc_inventory_stocks_create(v_product_id, 0);
+    proc_inventory_stocks_create(v_product_id, 0, v_product);
     
     OPEN v_product FOR
         SELECT p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price

@@ -46,10 +46,8 @@ namespace Inventory.Persistence.Repositories
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {            
-            IEnumerable<User>? result = null;
-            
             // Ejecutamos el procedimiento
             var data = await _connection.ExecuteProcedure(
                 spName: "proc_users_get_all",
@@ -59,9 +57,12 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
-            result = data.AsEnumerable().Select(
-                row => new User
+            // Obtenemos la lista
+            List<User> result = new List<User>();
+
+            foreach (DataRow row in data.Rows)
+            {
+                result.Add(new User
                 {
                     Id              = Convert.ToInt32(row["id"]),
                     Role            = new Role
@@ -72,8 +73,8 @@ namespace Inventory.Persistence.Repositories
                     },
                     Name            = row["name"].ToString(),
                     Email           = row["email"].ToString()
-                }
-            );
+                });
+            }
 
             return result;
         }
@@ -92,7 +93,7 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
+            // Obtenemos la entidad
             if (data.Rows.Count > 0)
             {
                 DataRow firstRow = data.AsEnumerable().First();
@@ -130,16 +131,13 @@ namespace Inventory.Persistence.Repositories
                     _connection.AddParameter("new_name", OracleDbType.Varchar2, ParameterDirection.Input, entity.Name),
                     _connection.AddParameter("new_email", OracleDbType.Varchar2, ParameterDirection.Input, entity.Email),
                     _connection.AddParameter("new_password", OracleDbType.Varchar2, ParameterDirection.Input, entity.Password),
-                    _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
+                    _connection.AddParameter("v_result", OracleDbType.Int32, ParameterDirection.Output)
                 }
             );
-            
+
             // Obtenemos el valor
-            if (data == 1 || data == 2)
-            {
+            if (data > 0)
                 success = true;
-                Console.WriteLine($"Data: {data}");
-            }
 
             return success;
         }
@@ -164,7 +162,7 @@ namespace Inventory.Persistence.Repositories
             );
 
             // Obtenemos el valor
-            if (data == 1)
+            if (data > 0)
                 success = true;
 
             return success;

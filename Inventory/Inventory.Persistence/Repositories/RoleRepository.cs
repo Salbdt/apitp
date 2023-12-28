@@ -12,7 +12,7 @@ namespace Inventory.Persistence.Repositories
             return null;
         }
 
-        public async Task<IEnumerable<Role>> GetAllAsync()
+        public async Task<List<Role>> GetAllAsync()
         {            
             // Ejecutamos el procedimiento
             var data = await _connection.ExecuteProcedure(
@@ -23,15 +23,18 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
-            IEnumerable<Role> result = data.AsEnumerable().Select(
-                row => new Role
+            // Obtenemos la lista
+            List<Role> result = new List<Role>();
+
+            foreach (DataRow row in data.Rows)
+            {
+                result.Add(new Role
                 {
                     Id          = Convert.ToInt32(row["id"]),
                     Name        = row["name"].ToString(),
                     Description = row["description"].ToString()
-                }
-            );
+                });
+            }
 
             return result;
         }
@@ -50,7 +53,7 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
+            // Obtenemos la entidad
             if (data.Rows.Count > 0)
             {
                 DataRow firstRow = data.AsEnumerable().First();

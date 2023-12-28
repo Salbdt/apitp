@@ -47,10 +47,8 @@ namespace Inventory.Persistence.Repositories
             return product;
         }
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
-        {            
-            IEnumerable<Product>? result = null;
-            
+        public async Task<List<Product>> GetAllAsync()
+        {
             // Ejecutamos el procedimiento
             var data = await _connection.ExecuteProcedure(
                 spName: "proc_products_get_all",
@@ -60,9 +58,12 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
-            result = data.AsEnumerable().Select(
-                row => new Product
+            // Obtenemos la lista
+            List<Product> result = new List<Product>();
+
+            foreach (DataRow row in data.Rows)
+            {
+                result.Add(new Product
                 {
                     Id              = Convert.ToInt32(row["id"]),
                     Category        = new Category
@@ -74,8 +75,8 @@ namespace Inventory.Persistence.Repositories
                     Name            = row["name"].ToString(),
                     Description     = row["description"].ToString(),
                     Price           = Convert.ToDecimal(row["price"])
-                }
-            );
+                });
+            }
 
             return result;
         }
@@ -94,7 +95,7 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
+            // Obtenemos la entidad
             if (data.Rows.Count > 0)
             {
                 DataRow firstRow = data.AsEnumerable().First();
@@ -122,7 +123,7 @@ namespace Inventory.Persistence.Repositories
             bool success = false; 
 
             // Ejecutamos el procedimiento
-            var data = await _connection.ExecuteProcedure(
+            var data = await _connection.ExecuteScalarProcedure(
                 spName: "proc_products_update",
                 parameters: new List<OracleParameter>()
                 {
@@ -131,12 +132,12 @@ namespace Inventory.Persistence.Repositories
                     _connection.AddParameter("new_name", OracleDbType.Varchar2, ParameterDirection.Input, entity.Name),
                     _connection.AddParameter("new_description", OracleDbType.Varchar2, ParameterDirection.Input, entity.Description),
                     _connection.AddParameter("new_price", OracleDbType.Decimal, ParameterDirection.Input, entity.Price),
-                    _connection.AddParameter("v_product", OracleDbType.RefCursor, ParameterDirection.Output)
+                    _connection.AddParameter("v_result", OracleDbType.Int32, ParameterDirection.Output)
                 }
             );
 
-            // Obtenemos el enumerable
-            if (data.Rows.Count > 0)
+            // Obtenemos el valor
+            if (data > 0)
                 success = true;
 
             return success;
@@ -147,23 +148,20 @@ namespace Inventory.Persistence.Repositories
             bool success = false;            
 
             // Ejecutamos el procedimiento
-            var data = await _connection.ExecuteProcedure(
+            var data = await _connection.ExecuteScalarProcedure(
                 spName: "proc_products_delete",
                 parameters: new List<OracleParameter>()
                 {
                     _connection.AddParameter("product_id_to_delete", OracleDbType.Int32, ParameterDirection.Input, id),
-                    _connection.AddParameter("v_result", OracleDbType.RefCursor, ParameterDirection.Output)
+                    _connection.AddParameter("v_result", OracleDbType.Int32, ParameterDirection.Output)
                 }
             );
 
-            // Obtenemos el enumerable
-            if (data.Rows.Count > 0)
-            {
-                DataRow firstRow = data.AsEnumerable().First();               
-                success = Convert.ToBoolean(firstRow["result"]);
-            }
+            // Obtenemos el valor
+            if (data > 0)
+                success = true;
 
             return success;
-        }        
+        }
     }
 }

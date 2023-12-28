@@ -82,7 +82,7 @@ namespace Inventory.WebAPI.Controllers
             var item = await _userService.DeleteAsync(id);
 
             if (!item)
-                _result = BadRequest("Resultado de la eliminación: Item no encontrado");
+                _result = BadRequest("Resultado de la eliminación: Item no eliminado");
             else
                 _result = Ok($"Resultado de la eliminación: Item {id} eliminado");
 

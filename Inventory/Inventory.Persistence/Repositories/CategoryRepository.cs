@@ -38,10 +38,8 @@ namespace Inventory.Persistence.Repositories
             return category;
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<List<Category>> GetAllAsync()
         {            
-            IEnumerable<Category>? result = null;
-            
             // Ejecutamos el procedimiento
             var data = await _connection.ExecuteProcedure(
                 spName: "proc_categories_get_all",
@@ -51,15 +49,18 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
-            result = data.AsEnumerable().Select(
-                row => new Category
+            // Obtenemos la lista
+            List<Category> result = new List<Category>();
+
+            foreach (DataRow row in data.Rows)
+            {
+                result.Add(new Category
                 {
                     Id          = Convert.ToInt32(row["id"]),
                     Name        = row["name"].ToString(),
                     Description = row["description"].ToString()
-                }
-            );
+                });
+            }
 
             return result;
         }
@@ -78,7 +79,7 @@ namespace Inventory.Persistence.Repositories
                 }
             );
 
-            // Obtenemos el enumerable
+            // Obtenemos la entidad
             if (data.Rows.Count > 0)
             {
                 DataRow firstRow = data.AsEnumerable().First();
@@ -99,19 +100,19 @@ namespace Inventory.Persistence.Repositories
             bool success = false; 
 
             // Ejecutamos el procedimiento
-            var data = await _connection.ExecuteProcedure(
+            var data = await _connection.ExecuteScalarProcedure(
                 spName: "proc_categories_update",
                 parameters: new List<OracleParameter>()
                 {
                     _connection.AddParameter("category_id", OracleDbType.Int32, ParameterDirection.Input, id),
                     _connection.AddParameter("new_name", OracleDbType.Varchar2, ParameterDirection.Input, entity.Name),
                     _connection.AddParameter("new_description", OracleDbType.Varchar2, ParameterDirection.Input, entity.Description),
-                    _connection.AddParameter("v_category", OracleDbType.RefCursor, ParameterDirection.Output)
+                    _connection.AddParameter("v_result", OracleDbType.Int32, ParameterDirection.Output)
                 }
             );
 
-            // Obtenemos el enumerable
-            if (data.Rows.Count > 0)
+            // Obtenemos el valor
+            if (data > 0)
                 success = true;
 
             return success;
@@ -122,21 +123,18 @@ namespace Inventory.Persistence.Repositories
             bool success = false;   
 
             // Ejecutamos el procedimiento
-            var data = await _connection.ExecuteProcedure(
+            var data = await _connection.ExecuteScalarProcedure(
                 spName: "proc_categories_delete",
                 parameters: new List<OracleParameter>()
                 {
                     _connection.AddParameter("category_id_to_delete", OracleDbType.Int32, ParameterDirection.Input, id),
-                    _connection.AddParameter("v_result", OracleDbType.RefCursor, ParameterDirection.Output)
+                    _connection.AddParameter("v_result", OracleDbType.Int32, ParameterDirection.Output)
                 }
             );
 
-            // Obtenemos el enumerable
-            if (data.Rows.Count > 0)
-            {
-                DataRow firstRow = data.AsEnumerable().First();               
-                success = Convert.ToBoolean(firstRow["result"]);
-            }
+            // Obtenemos el valor
+            if (data > 0)
+                success = true;
 
             return success;
         }
