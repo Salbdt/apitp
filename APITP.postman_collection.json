@@ -15,12 +15,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/Role",
+							"raw": "http://localhost:{{puerto}}/api/Role",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Role"
@@ -35,16 +35,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/Role/2",
+							"raw": "http://localhost:{{puerto}}/api/Role/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Role",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -70,12 +70,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/User",
+							"raw": "http://localhost:{{puerto}}/api/User",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"User"
@@ -90,12 +90,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/User",
+							"raw": "http://localhost:{{puerto}}/api/User",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"User"
@@ -110,12 +110,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/User/1",
+							"raw": "http://localhost:{{puerto}}/api/User/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"User",
@@ -140,12 +140,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/User/1;admin@mail.com;123",
+							"raw": "http://localhost:{{puerto}}/api/User/1;admin@mail.com;123",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"User",
@@ -170,12 +170,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/User/4",
+							"raw": "http://localhost:{{puerto}}/api/User/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"User",
@@ -205,12 +205,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/Category",
+							"raw": "http://localhost:{{puerto}}/api/Category",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Category"
@@ -225,12 +225,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/Category",
+							"raw": "http://localhost:{{puerto}}/api/Category",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Category"
@@ -245,12 +245,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/Category/1",
+							"raw": "http://localhost:{{puerto}}/api/Category/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Category",
@@ -275,12 +275,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/Category/4",
+							"raw": "http://localhost:{{puerto}}/api/Category/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Category",
@@ -305,12 +305,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/Category/4",
+							"raw": "http://localhost:{{puerto}}/api/Category/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Category",
@@ -340,12 +340,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/Product",
+							"raw": "http://localhost:{{puerto}}/api/Product",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Product"
@@ -360,12 +360,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/Product",
+							"raw": "http://localhost:{{puerto}}/api/Product",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Product"
@@ -380,12 +380,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5037/api/Product/1",
+							"raw": "http://localhost:{{puerto}}/api/Product/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Product",
@@ -410,12 +410,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/Product/3",
+							"raw": "http://localhost:{{puerto}}/api/Product/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Product",
@@ -440,12 +440,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5037/api/Product/5",
+							"raw": "http://localhost:{{puerto}}/api/Product/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5037",
+							"port": "{{puerto}}",
 							"path": [
 								"api",
 								"Product",
@@ -456,6 +456,244 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "InventoryStock",
+			"item": [
+				{
+					"name": "InventoryStock GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryStock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryStock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InventoryStock GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryStock/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryStock",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InventoryStock Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\": 1,\r\n  \"quantity\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryStock/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryStock",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InventoryMovement",
+			"item": [
+				{
+					"name": "InventoryMovement Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": \"2\",\r\n    \"name\": \"Intel Pentium\",\r\n    \"description\": \"Procesador barato marca Intel\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryMovement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryMovement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InventoryMovement GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryMovement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryMovement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InventoryMovement GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryMovement/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryMovement",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InventoryMovement Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": \"1\",\r\n    \"name\": \"Intel I3\",\r\n    \"description\": \"Procesador marca Intel\",\r\n    \"price\": 180\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryMovement/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryMovement",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InventoryMovement Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/InventoryMovement/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"InventoryMovement",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "puerto",
+			"value": "5037",
+			"type": "string"
 		}
 	]
 }
