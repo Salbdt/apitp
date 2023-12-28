@@ -16,7 +16,7 @@ BEGIN
     proc_inventory_stocks_create(v_product_id, 0, v_product);
     
     OPEN v_product FOR
-        SELECT p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
+        SELECT p.id, p.name, p.description, p.price, p.category_id, c.name as category_name, c.description as category_description
         FROM products p INNER JOIN categories c ON p.category_id = c.id
         WHERE p.id = v_product_id;
             
@@ -31,7 +31,7 @@ CREATE OR REPLACE PROCEDURE proc_products_get_all(
 AS
 BEGIN
     OPEN v_products FOR
-        SELECT p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
+        SELECT p.id, p.name, p.description, p.price, p.category_id, c.name as category_name, c.description as category_description
         FROM products p INNER JOIN categories c ON p.category_id = c.id;
 END;
 /
@@ -44,7 +44,7 @@ CREATE OR REPLACE PROCEDURE proc_products_get_by_id(
 AS
 BEGIN
     OPEN v_product FOR
-        SELECT p.id, p.category_id, c.name as category_name, c.description as category_description, p.name, p.description, p.price
+        SELECT p.id, p.name, p.description, p.price, p.category_id, c.name as category_name, c.description as category_description
         FROM products p INNER JOIN categories c ON p.category_id = c.id
         WHERE p.id = product_id;
 END;
