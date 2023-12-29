@@ -9,6 +9,7 @@ namespace Inventory.Persistence.Repositories
     {
         public async Task<List<Product>> GetAllProductsBySellerAsync(int userId)
         {
+            Console.WriteLine($"User ID Parámetro: {userId}");
             // Ejecutamos el procedimiento
             var data = await _connection.ExecuteProcedure(
                 spName: "proc_get_all_products_by_seller",
@@ -22,18 +23,15 @@ namespace Inventory.Persistence.Repositories
 
             // Obtenemos la lista
             List<Product> result = new List<Product>();
-
+            Console.WriteLine($"User ID DB: {data.Rows[0]["user_id"]}");
+            Console.WriteLine($"Productos: {data.Rows.Count}");
+            Console.WriteLine("\nROWS:");
             foreach (DataRow row in data.Rows)
             {
+                Console.WriteLine($"Row ID: {row["id"]}");
                 result.Add(new Product
                 {
                     Id              = Convert.ToInt32(row["id"]),
-                    Category        = new Category
-                    {
-                        Id          = Convert.ToInt32(row["category_id"]),
-                        Name        = row["category_name"].ToString(),
-                        Description = row["category_description"].ToString()
-                    },
                     Name            = row["name"].ToString(),
                     Description     = row["description"].ToString(),
                     Price           = Convert.ToDecimal(row["price"])

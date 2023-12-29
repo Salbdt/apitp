@@ -7,9 +7,8 @@ AS
 BEGIN
     OPEN v_products FOR
         SELECT -- El DISTINCT sobre p.id evita que me traiga productos repetidos si se vendió o compró el producto en varias ocasiones
-            DISTINCT(p.id), p.name, p.description, p.price, p.category_id, c.name AS category_name, c.description AS category_description
+            DISTINCT(p.id), p.name, p.description, p.price, p.category_id, imo.user_id
         FROM products p
-            INNER JOIN categories c             ON p.category_id    = c.id              -- Para traer el nombre de la categoría también (opcional)
             INNER JOIN inventory_movements imo  ON p.id             = imo.product_id    -- Necesario para saber que usuario compró o vendió el producto
             INNER JOIN inventory_stocks ist     ON p.id             = ist.product_id    -- Necesario para obtener los productos en stock
         WHERE   imo.user_id     = user_id
