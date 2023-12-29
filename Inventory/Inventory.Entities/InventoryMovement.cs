@@ -13,11 +13,11 @@ namespace Inventory.Entities
 
         public static MovementType GetMovementType(string movementTypeText)
         {
-            MovementType movementType = MovementType.INGRESO;
-            if (movementTypeText.Equals("INGRESO"))
-                movementType = MovementType.INGRESO;
-            else if (movementTypeText.Equals("EGRESO"))
-                movementType = MovementType.EGRESO;
+            MovementType movementType = MovementType.COMPRA;
+            if (movementTypeText.ToUpper().Equals("COMPRA"))
+                movementType = MovementType.COMPRA;
+            else if (movementTypeText.ToUpper().Equals("VENTA"))
+                movementType = MovementType.VENTA;
 
             return movementType;
         }

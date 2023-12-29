@@ -8,35 +8,39 @@ CREATE OR REPLACE PROCEDURE proc_inventory_movements_create(
 )
 AS
 v_inventory_movement_id inventory_movements.id%TYPE;
-v_new_quantity          inventory_movements.quantity%TYPE;
+v_stock_quantity        inventory_stocks.quantity%TYPE;
 v_result                NUMBER;
 BEGIN
-    -- Para trabajar siempre cON números positivos
-    IF (new_quantity < 0) then
-        select new_quantity * -1 INTO v_new_quantity FROM dual;
-    END IF;
-
+    -- Insertamos el movimiento
     INSERT INTO inventory_movements (id, product_id, user_id, quantity, movement_type, movement_date)
-    VALUES (0, new_product_id, new_user_id, v_new_quantity, new_movement_type, SYSDATE)
+    VALUES (0, new_product_id, new_user_id, new_quantity, new_movement_type, SYSDATE)
     RETURNING id INTO v_inventory_movement_id;
     
-    -- LAS posibilidades sON INGRESO para comprar productos y EGRESO para vender productos
-    IF (new_movement_type = 'INGRESO') then    
-        proc_inventory_stocks_update(new_product_id, v_new_quantity, v_result);
+    -- Las posibilidades son COMPRA para comprar productos y VENTA para vender productos
+    IF (new_movement_type = 'COMPRA') THEN    
+        proc_inventory_stocks_update(new_product_id, new_quantity, v_result);             -- Sumamos
     ELSE
-        IF (new_movement_type = 'EGRESO') THEN
-            proc_inventory_stocks_update(new_product_id, v_new_quantity * -1, v_result);
+        IF (new_movement_type = 'VENTA') THEN
+            proc_inventory_stocks_update(new_product_id, new_quantity * -1, v_result);    -- Restamos
         END IF;
+    END IF;
+        
+    SELECT ist.quantity INTO v_stock_quantity
+    FROM inventory_stocks ist
+    WHERE ist.product_id = new_product_id;
+        
+    if (v_stock_quantity < 0) THEN
+        ROLLBACK;
+    ELSE        
+        COMMIT;
     END IF;
     
     OPEN v_inventory_movement FOR    
-        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type
+        SELECT im.id, im.product_id, p.name AS product_name, p.description AS product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
         FROM inventory_movements im
             INNER JOIN products p ON im.product_id = p.id
             INNER JOIN users u ON im.user_id = u.id
         WHERE im.id = v_inventory_movement_id;
-        
-    COMMIT;
 END;
 /
 
@@ -47,7 +51,7 @@ CREATE OR REPLACE PROCEDURE proc_inventory_movements_get_all(
 AS
 BEGIN
     OPEN v_inventory_movements FOR    
-        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type
+        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
         FROM inventory_movements im
             INNER JOIN products p ON im.product_id = p.id
             INNER JOIN users u ON im.user_id = u.id;
@@ -62,7 +66,7 @@ CREATE OR REPLACE PROCEDURE proc_inventory_movements_get_by_id(
 AS
 BEGIN
     OPEN v_inventory_movement FOR    
-        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type
+        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
         FROM inventory_movements im
             INNER JOIN products p ON im.product_id = p.id
             INNER JOIN users u ON im.user_id = u.id

@@ -1,5 +1,3 @@
-using Inventory.DTOs.Products;
-using Inventory.DTOs.Users;
 using Inventory.Entities;
 using Inventory.Entities.Enums;
 
@@ -10,7 +8,7 @@ namespace Inventory.DTOs.InventoryMovements
         public int ProductId { get; set; }
         public int UserId { get; set; }
         public int Quantity { get; set; }
-        public MovementType MovementType { get; set; }
+        public string MovementType { get; set; } = string.Empty;
 
         public InventoryMovementPutDTO()
         {
@@ -22,7 +20,7 @@ namespace Inventory.DTOs.InventoryMovements
             ProductId       = (inventoryMovement.Product is not null) ? inventoryMovement.Product.Id : 0;
             UserId          = (inventoryMovement.User is not null) ? inventoryMovement.User.Id : 0;
             Quantity        = inventoryMovement.Quantity;
-            MovementType    = inventoryMovement.MovementType;
+            MovementType    = inventoryMovement.MovementType.ToString();
         }
 
         public InventoryMovement ToEntity()
@@ -45,8 +43,8 @@ namespace Inventory.DTOs.InventoryMovements
             {
                 Product         = product,
                 User            = user,
-                Quantity        = Quantity,
-                MovementType    = MovementType
+                Quantity        = this.Quantity,
+                MovementType    = InventoryMovement.GetMovementType(this.MovementType)
             };
         }
     }
