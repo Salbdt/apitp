@@ -15,6 +15,16 @@
 						{
 							"name": "Roles GetAll",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -58,35 +68,6 @@
 				{
 					"name": "Users",
 					"item": [
-						{
-							"name": "Users Create",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"roleId\": 3,\r\n  \"name\": \"Comprador 2\",\r\n  \"email\": \"comprador2@mail.com\",\r\n  \"password\": \"123\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:{{puerto}}/api/User",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{puerto}}",
-									"path": [
-										"api",
-										"User"
-									]
-								}
-							},
-							"response": []
-						},
 						{
 							"name": "Users GetAll",
 							"request": {
@@ -702,13 +683,75 @@
 			"name": "EndPoints Obligatorios",
 			"item": [
 				{
-					"name": "CreateProduct",
+					"name": "Users Register",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"categoryId\": \"2\",\r\n    \"name\": \"Placa Intel Buena\",\r\n    \"description\": \"Placa marca Intel\",\r\n    \"price\": 145\r\n}",
+							"raw": "{\r\n  \"roleId\": 1,\r\n  \"name\": \"Sal\",\r\n  \"email\": \"sal@mail.com\",\r\n  \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/User/Register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"User",
+								"Register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{puerto}}/api/User/Login/sal@mail.com;123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"api",
+								"User",
+								"Login",
+								"sal@mail.com;123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": \"3\",\r\n    \"name\": \"Memoria 16 GB\",\r\n    \"description\": \"Memoria de computadora\",\r\n    \"price\": 80\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -733,6 +776,16 @@
 				{
 					"name": "GetAllProducts",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -753,10 +806,20 @@
 				{
 					"name": "GetProduct",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/GetProduct/1",
+							"raw": "http://localhost:{{puerto}}/api/GetProduct/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -765,7 +828,7 @@
 							"path": [
 								"api",
 								"GetProduct",
-								"1"
+								"7"
 							]
 						}
 					},
@@ -774,11 +837,21 @@
 				{
 					"name": "UpdateProduct",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"categoryId\": \"1\",\r\n    \"name\": \"Intel I3\",\r\n    \"description\": \"Procesador marca Intel\",\r\n    \"price\": 180\r\n}",
+							"raw": "{\r\n    \"categoryId\": \"3\",\r\n    \"name\": \"Memoria 2 GB\",\r\n    \"description\": \"Memoria de computadora\",\r\n    \"price\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -786,7 +859,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/UpdateProduct/30",
+							"raw": "http://localhost:{{puerto}}/api/UpdateProduct/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -795,7 +868,7 @@
 							"path": [
 								"api",
 								"UpdateProduct",
-								"30"
+								"7"
 							]
 						}
 					},
@@ -804,6 +877,16 @@
 				{
 					"name": "DeleteProduct",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -816,7 +899,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/DeleteProduct/5",
+							"raw": "http://localhost:{{puerto}}/api/DeleteProduct/11",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -825,7 +908,7 @@
 							"path": [
 								"api",
 								"DeleteProduct",
-								"5"
+								"11"
 							]
 						}
 					},
@@ -834,10 +917,20 @@
 				{
 					"name": "GetAllProductsBySeller",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/GetAllProductsBySeller",
+							"raw": "http://localhost:{{puerto}}/api/GetAllProductsBySeller/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -845,7 +938,8 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"GetAllProductsBySeller"
+								"GetAllProductsBySeller",
+								"2"
 							]
 						}
 					},
@@ -854,6 +948,16 @@
 				{
 					"name": "CreatePurchase",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -883,10 +987,20 @@
 				{
 					"name": "GetPurchaseResume",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/GetPurchaseResume/8",
+							"raw": "http://localhost:{{puerto}}/api/GetPurchaseResume/10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -895,7 +1009,7 @@
 							"path": [
 								"api",
 								"GetPurchaseResume",
-								"8"
+								"10"
 							]
 						}
 					},
@@ -928,6 +1042,11 @@
 		{
 			"key": "puerto",
 			"value": "5037",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJzYWxAbWFpbC5jb20iLCJJZCI6IjgiLCJOYW1lIjoiU2FsIiwiRW1haWwiOiJzYWxAbWFpbC5jb20iLCJuYmYiOjE3MDQyMTg3ODgsImV4cCI6MTcwNDIyNTk4OCwiaWF0IjoxNzA0MjE4Nzg4LCJpc3MiOiJpc3N1ZXIiLCJhdWQiOiJpc3N1ZXIifQ.ywxA0l8z4gXeAnRY99hTgomRaXeYMBjSixDqQfC6BH94L9z4fbubh7s7v2SppgTzyfmOD3LatH1HmbiaFCn5ow",
 			"type": "string"
 		}
 	]

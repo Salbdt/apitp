@@ -2,6 +2,7 @@ using Inventory.DTOs.Users;
 using Inventory.Entities;
 using Inventory.Services.Interfaces;
 using Inventory.Services.Interfaces.CRUD;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
@@ -39,6 +40,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -59,6 +61,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -90,6 +93,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
+        [Authorize]
         [HttpPut("{id};{email};{password}")]
         public async Task<IActionResult> Update(int id, string email, string password, UserPutDTO userPutDTO)
         {
@@ -103,6 +107,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

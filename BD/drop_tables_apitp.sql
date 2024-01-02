@@ -16,6 +16,8 @@ DROP PROCEDURE proc_roles_get_by_id;
 DROP PROCEDURE proc_users_create;
 DROP PROCEDURE proc_users_get_all;
 DROP PROCEDURE proc_users_get_by_id;
+DROP PROCEDURE proc_users_get_by_email;
+DROP PROCEDURE proc_users_login;
 DROP PROCEDURE proc_users_update;
 DROP PROCEDURE proc_users_delete;
 DROP PROCEDURE proc_categories_create;

@@ -1,10 +1,12 @@
 using Inventory.DTOs.Products;
 using Inventory.Services.Interfaces;
 using Inventory.Services.Interfaces.CRUD;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api")]
     public class ReportController : ControllerBase
