@@ -52,7 +52,7 @@ Servicio API con ASP.NET Core. Utilizand C# y Oracle.
  - Descargar o clonar el repositorio.
  - Utilizar los scripts de la carpeta "BD" numerados, ejecutándolos en orden.
     - En este caso, el script "00_inventory_user.sql" crea un usuario nuevo con una contraseña que pueden cambiar.
-    - Hay crear una nueva conexión con SQL Developer
+    - Hay que crear una nueva conexión con SQL Developer
     - Todos los scripts restantes se tienen que conectar a esta conexion.
  - Abrir una consola, posicionarse en "Inventory.WebAPI" y ejecutar el servicio con "dotnet run".
     - Si no hay errores apareceran unas líneas con info, entre ellas la ruta con el puerto para acceder.
