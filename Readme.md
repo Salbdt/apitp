@@ -8,9 +8,12 @@ Servicio API con ASP.NET Core. Utilizand C# y Oracle.
 
 ### Base de datos
  - La base de datos cuenta con las siguientes tablas:
-    - roles y users
-    - categories y products
-    - inventory_stocks e inventory_movements
+    - roles
+    - users
+    - categories
+    - products
+    - inventory_stocks
+    - inventory_movements
 
 ### Endpoints
  - Roles
