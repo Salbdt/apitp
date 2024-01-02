@@ -1,6 +1,6 @@
 using Inventory.DTOs.InventoryStocks;
 using Inventory.Entities;
-using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces.CRUD;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
@@ -9,9 +9,9 @@ namespace Inventory.WebAPI.Controllers
     [Route("api/[controller]")]
     public class InventoryStockController : BaseController<InventoryStock>
     {
-        private readonly InventoryStockService _inventoryStockService;
+        private readonly IInventoryStockService _inventoryStockService;
 
-        public InventoryStockController(InventoryStockService inventoryStockService)
+        public InventoryStockController(IInventoryStockService inventoryStockService)
         {
             _inventoryStockService = inventoryStockService;
         }

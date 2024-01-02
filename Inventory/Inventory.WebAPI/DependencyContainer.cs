@@ -5,12 +5,17 @@ using Inventory.Persistence.Repositories;
 using Inventory.Persistence.Repositories.CRUD;
 using Inventory.Services;
 using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces;
+using Inventory.Services.Interfaces.CRUD;
 
-    public static class DependencyContainer
+public static class DependencyContainer
     {
-        public static IServiceCollection AddDB(this IServiceCollection services)
+        public static IServiceCollection AddOracle(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            string connectionString)
         {
-            services.AddSingleton<OracleDB>();
+            services.AddSingleton(new OracleDB(configuration.GetConnectionString(connectionString)));
             return services;
         }
 
@@ -32,14 +37,15 @@ using Inventory.Services.CRUD;
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             // CRUD
-            services.AddScoped<RoleService>();
-            services.AddScoped<UserService>();
-            services.AddScoped<CategoryService>();
-            services.AddScoped<ProductService>();
-            services.AddScoped<InventoryStockService>();
-            services.AddScoped<InventoryMovementService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IInventoryStockService, InventoryStockService>();
+            services.AddScoped<IInventoryMovementService, InventoryMovementService>();
 
-            services.AddScoped<ReportService>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<ITokenService, TokenService>();
             
             return services;
         }

@@ -7,6 +7,11 @@ namespace Inventory.Persistence.Repositories
 {
     public class ReportRepository : DBRepository, IReportRepository
     {
+        public ReportRepository(OracleDB connection) : base(connection)
+        {
+            
+        }
+
         public async Task<List<Product>> GetAllProductsBySellerAsync(int userId)
         {
             // Ejecutamos el procedimiento

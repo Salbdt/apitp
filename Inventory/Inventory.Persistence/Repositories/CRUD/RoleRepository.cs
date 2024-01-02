@@ -7,6 +7,11 @@ namespace Inventory.Persistence.Repositories.CRUD
 {
     public class RoleRepository : DBRepository, IRoleRepository
     {
+        public RoleRepository(OracleDB connection) : base(connection)
+        {
+            
+        }
+
         public async Task<Role?> CreateAsync(Role entity)
         { // No implementado
             return null;
@@ -48,7 +53,7 @@ namespace Inventory.Persistence.Repositories.CRUD
                 spName: "proc_roles_get_by_id",
                 parameters: new List<OracleParameter>()
                 {
-                    _connection.AddParameter("role_id", OracleDbType.Int32, ParameterDirection.Input, id),
+                    _connection.AddParameter("p_role_id", OracleDbType.Int32, ParameterDirection.Input, id),
                     _connection.AddParameter("v_role", OracleDbType.RefCursor, ParameterDirection.Output)
                 }
             );

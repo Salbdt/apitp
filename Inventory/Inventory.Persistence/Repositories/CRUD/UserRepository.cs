@@ -7,6 +7,11 @@ namespace Inventory.Persistence.Repositories.CRUD
 {
     public class UserRepository : DBRepository, IUserRepository
     {
+        public UserRepository(OracleDB connection) : base(connection)
+        {
+            
+        }
+
         public async Task<User?> CreateAsync(User entity)
         {
             User? user = null;
@@ -87,6 +92,62 @@ namespace Inventory.Persistence.Repositories.CRUD
                 parameters: new List<OracleParameter>()
                 {
                     _connection.AddParameter("user_id", OracleDbType.Int32, ParameterDirection.Input, id),
+                    _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
+                }
+            );
+
+            // Obtenemos la entidad
+            if (data.Rows.Count > 0)
+            {
+                user = new User
+                {
+                    Id              = Convert.ToInt32(data.Rows[0]["id"]),
+                    Role            = new Role
+                    {
+                        Id          = Convert.ToInt32(data.Rows[0]["role_id"]),
+                        Name        = data.Rows[0]["role_name"].ToString(),
+                        Description = data.Rows[0]["role_description"].ToString()
+                    },
+                    Name            = data.Rows[0]["name"].ToString(),
+                    Email           = data.Rows[0]["email"].ToString()
+                };
+            }
+
+            return user;
+        }
+
+        public async Task<bool> ExistsAsync(string email)
+        {
+            bool exists = false;
+
+            // Ejecutamos el procedimiento
+            var data = await _connection.ExecuteProcedure(
+                spName: "proc_users_get_by_email",
+                parameters: new List<OracleParameter>()
+                {
+                    _connection.AddParameter("p_user_email", OracleDbType.Varchar2, ParameterDirection.Input, email),
+                    _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
+                }
+            );
+
+            // Obtenemos la entidad
+            if (data.Rows.Count > 0)
+                exists = true;
+
+            return exists;
+        }
+
+        public async Task<User?> LoginAsync(string email, string password)
+        {
+            User? user = null;
+
+            // Ejecutamos el procedimiento
+            var data = await _connection.ExecuteProcedure(
+                spName: "proc_users_login",
+                parameters: new List<OracleParameter>()
+                {
+                    _connection.AddParameter("p_user_email", OracleDbType.Varchar2, ParameterDirection.Input, email),
+                    _connection.AddParameter("p_user_password", OracleDbType.Varchar2, ParameterDirection.Input, password),
                     _connection.AddParameter("v_user", OracleDbType.RefCursor, ParameterDirection.Output)
                 }
             );

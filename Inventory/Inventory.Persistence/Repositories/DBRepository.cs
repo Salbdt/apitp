@@ -1,13 +1,15 @@
+using System.Data;
+
 namespace Inventory.Persistence.Repositories
 {
     public class DBRepository
     {
         protected readonly OracleDB _connection;
 
-        public DBRepository()
+        public DBRepository(OracleDB connection)
         {
-            // TODO Cambiar modo de inicializar OracleDB
-            _connection = new OracleDB("Data Source=//localhost:1521/xepdb1;User Id=inventory;Password=1011SQLexp");
+            // _connection = new OracleDB("Data Source=//localhost:1521/xepdb1;User Id=inventory;Password=1011SQLexp");
+            _connection = connection;
         }
     }
 }

@@ -1,17 +1,19 @@
 using Inventory.DTOs.Roles;
 using Inventory.Entities;
-using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces.CRUD;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class RoleController : BaseController<Role>
     {
-        private readonly RoleService _roleService;
+        private readonly IRoleService _roleService;
 
-        public RoleController(RoleService roleService)
+        public RoleController(IRoleService roleService)
         {
             _roleService = roleService;
         }

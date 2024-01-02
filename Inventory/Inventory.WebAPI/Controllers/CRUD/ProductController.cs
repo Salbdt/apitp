@@ -1,6 +1,6 @@
 using Inventory.DTOs.Products;
 using Inventory.Entities;
-using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces.CRUD;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
@@ -9,9 +9,9 @@ namespace Inventory.WebAPI.Controllers
     [Route("api")]
     public class ProductController : BaseController<Product>
     {
-        private readonly ProductService _productService;
+        private readonly IProductService _productService;
 
-        public ProductController(ProductService productService)
+        public ProductController(IProductService productService)
         {
             _productService = productService;
         }

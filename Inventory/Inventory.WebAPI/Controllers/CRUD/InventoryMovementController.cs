@@ -1,6 +1,6 @@
 using Inventory.DTOs.InventoryMovements;
 using Inventory.Entities;
-using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces.CRUD;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
@@ -9,9 +9,9 @@ namespace Inventory.WebAPI.Controllers
     [Route("api")]
     public class InventoryMovementController : BaseController<InventoryMovement>
     {
-        private readonly InventoryMovementService _inventoryMovementService;
+        private readonly IInventoryMovementService _inventoryMovementService;
 
-        public InventoryMovementController(InventoryMovementService inventoryMovementService)
+        public InventoryMovementController(IInventoryMovementService inventoryMovementService)
         {
             _inventoryMovementService = inventoryMovementService;
         }

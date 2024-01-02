@@ -7,6 +7,11 @@ namespace Inventory.Persistence.Repositories.CRUD
 {
     public class CategoryRepository : DBRepository, ICategoryRepository
     {
+        public CategoryRepository(OracleDB connection) : base(connection)
+        {
+            
+        }
+
         public async Task<Category?> CreateAsync(Category entity)
         {
             Category? category = null;

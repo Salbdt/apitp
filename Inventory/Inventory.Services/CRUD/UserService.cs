@@ -21,6 +21,16 @@ namespace Inventory.Services.CRUD
 
             return user;
         }
+
+        public async Task<bool> ExistsAsync(string email)
+        {
+            return await _userRepository.ExistsAsync(email);
+        }
+
+        public async Task<User?> LoginAsync(string email, string password)
+        {
+            return await _userRepository.LoginAsync(email, password);
+        }
         
         public async Task<bool> UpdateAsync(int id, string email, string password, User entity)
         {

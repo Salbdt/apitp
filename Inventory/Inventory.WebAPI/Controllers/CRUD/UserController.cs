@@ -1,6 +1,7 @@
 using Inventory.DTOs.Users;
 using Inventory.Entities;
-using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces;
+using Inventory.Services.Interfaces.CRUD;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
@@ -9,23 +10,31 @@ namespace Inventory.WebAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : BaseController<User>
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
+        private readonly ITokenService _tokenService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService, ITokenService tokenService)
         {
             _userService = userService;
+            _tokenService = tokenService;
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> Post(UserPutDTO userPutDTO)
         {
-            var item = await _userService.CreateAsync(userPutDTO.ToEntity());
+            var exists = await _userService.ExistsAsync(userPutDTO.Email);
 
-            if (item is null)
-                _result = BadRequest("Resultado de la inserción: Item no creado");       
+            if (exists)
+                _result = BadRequest("Resultado de registro: Email ya registrado");
             else
-                _result = Ok(new UserListDTO(item));
-                
+            {
+                var item = await _userService.CreateAsync(userPutDTO.ToEntity());
+
+                if (item is null)
+                    _result = BadRequest("Resultado de registro: Item no registrado");       
+                else
+                    _result = Ok(new UserListDTO(item));
+            }
 
             return _result;
         }
@@ -59,6 +68,24 @@ namespace Inventory.WebAPI.Controllers
                 _result = NotFound("Resultado de la búsqueda: Item no encontrado");
             else
                 _result = Ok(new UserListDTO(item));
+
+            return _result;
+        }
+
+        [HttpPost("Login/{email};{password}")]
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            var item = await _userService.LoginAsync(email, password);
+
+            if (item is null)
+                _result = Unauthorized("Resultado de ingreso: No autorizado");
+            else
+            {
+                var token = _tokenService.CreateToken(item);
+
+                _result = Ok(new UserLoginDTO(item, token));
+
+            }
 
             return _result;
         }

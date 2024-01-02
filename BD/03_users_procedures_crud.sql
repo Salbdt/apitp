@@ -48,6 +48,36 @@ BEGIN
 END;
 /
 
+-- USERS GET BY ID
+CREATE OR REPLACE PROCEDURE proc_users_get_by_email(
+    p_user_email    IN users.email%TYPE,
+    v_user          OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN v_user FOR
+        SELECT u.id, u.role_id, r.name as role_name, r.description as role_description, u.name, u.email
+        FROM users u INNER JOIN roles r ON u.role_id = r.id
+        WHERE u.email = p_user_email;
+END;
+/
+
+-- USERS LOGIN
+CREATE OR REPLACE PROCEDURE proc_users_login(
+    p_user_email    IN users.email%TYPE,
+    p_user_password IN users.password%TYPE,
+    v_user          OUT SYS_REFCURSOR
+)
+AS
+BEGIN
+    OPEN v_user FOR
+        SELECT u.id, u.role_id, r.name as role_name, r.description as role_description, u.name, u.email
+        FROM users u INNER JOIN roles r ON u.role_id = r.id
+        WHERE   u.email     = LOWER(p_user_email)
+        AND     u.password  = STANDARD_HASH(p_user_password, 'SHA512');
+END;
+/
+
 -- USERS UPDATE
 CREATE OR REPLACE PROCEDURE proc_users_update(
     user_id         in users.id%TYPE,

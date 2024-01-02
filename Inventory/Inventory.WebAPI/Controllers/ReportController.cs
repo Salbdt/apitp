@@ -1,6 +1,6 @@
 using Inventory.DTOs.Products;
-using Inventory.Services;
-using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces;
+using Inventory.Services.Interfaces.CRUD;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
@@ -10,10 +10,10 @@ namespace Inventory.WebAPI.Controllers
     public class ReportController : ControllerBase
     {
         private ObjectResult? _result;
-        private readonly ReportService _reportService;
-        private readonly UserService _userService;
+        private readonly IReportService _reportService;
+        private readonly IUserService _userService;
 
-        public ReportController(ReportService reportService, UserService userService)
+        public ReportController(IReportService reportService, IUserService userService)
         {
             _reportService = reportService;
             _userService = userService;

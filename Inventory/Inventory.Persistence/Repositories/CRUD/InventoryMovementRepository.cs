@@ -7,6 +7,11 @@ namespace Inventory.Persistence.Repositories.CRUD
 {
     public class InventoryMovementRepository : DBRepository, IInventoryMovementRepository
     {
+        public InventoryMovementRepository(OracleDB connection) : base(connection)
+        {
+            
+        }
+
         public async Task<InventoryMovement?> CreateAsync(InventoryMovement entity)
         {
             InventoryMovement? inventoryMovement = null;

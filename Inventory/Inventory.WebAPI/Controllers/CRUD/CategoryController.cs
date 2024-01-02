@@ -1,6 +1,6 @@
 using Inventory.DTOs.Categories;
 using Inventory.Entities;
-using Inventory.Services.CRUD;
+using Inventory.Services.Interfaces.CRUD;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory.WebAPI.Controllers
@@ -9,9 +9,9 @@ namespace Inventory.WebAPI.Controllers
     [Route("api/[controller]")]
     public class CategoryController : BaseController<Category>
     {
-        private readonly CategoryService _categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(CategoryService categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }

@@ -12,7 +12,7 @@ END;
 
 -- ROLES GET BY ID
 create or replace procedure proc_roles_get_by_id(
-    role_id     IN roles.id%TYPE,
+    p_role_id   IN roles.id%TYPE,
     v_role      OUT SYS_REFCURSOR
 )
 as
@@ -20,6 +20,6 @@ begin
     OPEN v_role FOR
         SELECT id, name, description
         FROM roles
-        WHERE id = role_id;
+        WHERE id = p_role_id;
 end;
 /
