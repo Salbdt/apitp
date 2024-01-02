@@ -1,3 +1,4 @@
+using Inventory.Persistence;
 using Inventory.Persistence.Interfaces;
 using Inventory.Persistence.Interfaces.CRUD;
 using Inventory.Persistence.Repositories;
@@ -7,6 +8,12 @@ using Inventory.Services.CRUD;
 
     public static class DependencyContainer
     {
+        public static IServiceCollection AddDB(this IServiceCollection services)
+        {
+            services.AddSingleton<OracleDB>();
+            return services;
+        }
+
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             // CRUD

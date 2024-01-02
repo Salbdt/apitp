@@ -36,7 +36,7 @@ BEGIN
     END IF;
     
     OPEN v_inventory_movement FOR    
-        SELECT im.id, im.product_id, p.name AS product_name, p.description AS product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
+        SELECT im.id, im.product_id, p.name AS product_name, p.description AS product_description, p.price as product_price, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
         FROM inventory_movements im
             INNER JOIN products p ON im.product_id = p.id
             INNER JOIN users u ON im.user_id = u.id
@@ -51,7 +51,7 @@ CREATE OR REPLACE PROCEDURE proc_inventory_movements_get_all(
 AS
 BEGIN
     OPEN v_inventory_movements FOR    
-        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
+        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, p.price as product_price, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
         FROM inventory_movements im
             INNER JOIN products p ON im.product_id = p.id
             INNER JOIN users u ON im.user_id = u.id;
@@ -66,7 +66,7 @@ CREATE OR REPLACE PROCEDURE proc_inventory_movements_get_by_id(
 AS
 BEGIN
     OPEN v_inventory_movement FOR    
-        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
+        SELECT im.id, im.product_id, p.name AS product_name, p.description as product_description, p.price as product_price, im.user_id, u.name AS user_name, im.quantity, im.movement_type, im.movement_date
         FROM inventory_movements im
             INNER JOIN products p ON im.product_id = p.id
             INNER JOIN users u ON im.user_id = u.id

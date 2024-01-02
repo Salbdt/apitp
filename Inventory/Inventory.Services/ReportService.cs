@@ -11,7 +11,7 @@ namespace Inventory.Services
         public ReportService(IReportRepository repository)
         {
             _reportRepository = repository;
-        }        
+        }
 
         public async Task<List<Product>> GetAllProductsBySellerAsync(int userId)
         {

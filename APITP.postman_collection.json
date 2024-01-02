@@ -7,62 +7,708 @@
 	},
 	"item": [
 		{
-			"name": "Roles",
+			"name": "General",
 			"item": [
 				{
-					"name": "Roles GetAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Role",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Role"
-							]
+					"name": "Roles",
+					"item": [
+						{
+							"name": "Roles GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/Role",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"Role"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Roles GetById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/Role/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"Role",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Roles GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Role/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Role",
-								"1"
-							]
+					"name": "Users",
+					"item": [
+						{
+							"name": "Users Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"roleId\": 3,\r\n  \"name\": \"Comprador 2\",\r\n  \"email\": \"comprador2@mail.com\",\r\n  \"password\": \"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/User",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"User"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/User",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"User"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users GetById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/User/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"User",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleId\": 1,\r\n    \"name\": \"Sal\",\r\n    \"email\": \"sal@mail.com\",\r\n    \"password\": \"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/User/1;admin@mail.com;123",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"User",
+										"1;admin@mail.com;123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/User/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"User",
+										"4"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Category Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Placa Madre\",\r\n  \"description\": \"Placas madre de computadora\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/Category",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"Category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/Category",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"Category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category GetById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/Category/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"Category",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Periféricos\",\r\n    \"description\": \"Periféricos de computadora\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/Category/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"Category",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/Category/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"Category",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Product Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\": \"2\",\r\n    \"name\": \"Placa Intel Buena\",\r\n    \"description\": \"Placa marca Intel\",\r\n    \"price\": 145\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/CreateProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"CreateProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/GetAllProducts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"GetAllProducts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product GetById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/GetProduct/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"GetProduct",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\": \"1\",\r\n    \"name\": \"Intel I3\",\r\n    \"description\": \"Procesador marca Intel\",\r\n    \"price\": 180\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/UpdateProduct/30",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"UpdateProduct",
+										"30"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/DeleteProduct/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"DeleteProduct",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "InventoryStock",
+					"item": [
+						{
+							"name": "InventoryStock GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/InventoryStock",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"InventoryStock"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "InventoryStock GetById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/InventoryStock/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"InventoryStock",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "InventoryStock Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productId\": 1,\r\n  \"quantity\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/InventoryStock/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"InventoryStock",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "InventoryMovement",
+					"item": [
+						{
+							"name": "InventoryMovement CreatePurchase",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productId\": 3,\r\n  \"userId\": 2,\r\n  \"quantity\": 1,\r\n  \"movementType\": \"VENTA\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/CreatePurchase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"CreatePurchase"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "InventoryMovement GetAll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/InventoryMovement",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"InventoryMovement"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "InventoryMovement GetPurchaseResume",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/GetPurchaseResume/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"GetPurchaseResume",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "InventoryMovement Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\": \"1\",\r\n    \"name\": \"Intel I3\",\r\n    \"description\": \"Procesador marca Intel\",\r\n    \"price\": 180\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/InventoryMovement/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"InventoryMovement",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "InventoryMovement Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/InventoryMovement/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"InventoryMovement",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reports",
+					"item": [
+						{
+							"name": "Reports GetAllProductsBySeller",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{puerto}}/api/GetAllProductsBySeller",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"api",
+										"GetAllProductsBySeller"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
 		{
-			"name": "Users",
+			"name": "EndPoints Obligatorios",
 			"item": [
 				{
-					"name": "Users Create",
+					"name": "CreateProduct",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"roleId\": 1,\r\n  \"name\": \"Admin\",\r\n  \"email\": \"admin@mail.com\",\r\n  \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"categoryId\": \"2\",\r\n    \"name\": \"Placa Intel Buena\",\r\n    \"description\": \"Placa marca Intel\",\r\n    \"price\": 145\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,7 +716,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/User",
+							"raw": "http://localhost:{{puerto}}/api/CreateProduct",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -78,19 +724,19 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"User"
+								"CreateProduct"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Users GetAll",
+					"name": "GetAllProducts",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/User",
+							"raw": "http://localhost:{{puerto}}/api/GetAllProducts",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -98,19 +744,19 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"User"
+								"GetAllProducts"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Users GetById",
+					"name": "GetProduct",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/User/1",
+							"raw": "http://localhost:{{puerto}}/api/GetProduct/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -118,7 +764,7 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"User",
+								"GetProduct",
 								"1"
 							]
 						}
@@ -126,277 +772,7 @@
 					"response": []
 				},
 				{
-					"name": "Users Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"roleId\": 1,\r\n    \"name\": \"Sal\",\r\n    \"email\": \"sal@mail.com\",\r\n    \"password\": \"123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/User/1;admin@mail.com;123",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"User",
-								"1;admin@mail.com;123"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Users Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/User/4",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"User",
-								"4"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Category",
-			"item": [
-				{
-					"name": "Category Create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Gabinete\",\r\n  \"description\": \"Gabinetes de computadora\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Category",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Category"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Category GetAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Category",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Category"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Category GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Category/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Category",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Category Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Periféricos\",\r\n    \"description\": \"Periféricos de computadora\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Category/4",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Category",
-								"4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Category Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Category/4",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Category",
-								"4"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Product",
-			"item": [
-				{
-					"name": "Product Create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"categoryId\": \"2\",\r\n    \"name\": \"Intel Pentium\",\r\n    \"description\": \"Procesador barato marca Intel\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Product",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Product"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Product GetAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Product",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Product"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Product GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Product/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"Product",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Product Update",
+					"name": "UpdateProduct",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -410,7 +786,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Product/3",
+							"raw": "http://localhost:{{puerto}}/api/UpdateProduct/30",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -418,15 +794,15 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"Product",
-								"3"
+								"UpdateProduct",
+								"30"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Product Delete",
+					"name": "DeleteProduct",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -440,7 +816,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/Product/5",
+							"raw": "http://localhost:{{puerto}}/api/DeleteProduct/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -448,25 +824,20 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"Product",
+								"DeleteProduct",
 								"5"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "InventoryStock",
-			"item": [
+				},
 				{
-					"name": "InventoryStock GetAll",
+					"name": "GetAllProductsBySeller",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryStock",
+							"raw": "http://localhost:{{puerto}}/api/GetAllProductsBySeller",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -474,76 +845,20 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"InventoryStock"
+								"GetAllProductsBySeller"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "InventoryStock GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryStock/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"InventoryStock",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "InventoryStock Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"productId\": 1,\r\n  \"quantity\": 10\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryStock/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"InventoryStock",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "InventoryMovement",
-			"item": [
-				{
-					"name": "InventoryMovement Create",
+					"name": "CreatePurchase",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"categoryId\": \"2\",\r\n    \"name\": \"Intel Pentium\",\r\n    \"description\": \"Procesador barato marca Intel\"\r\n}",
+							"raw": "{\r\n  \"productId\": 3,\r\n  \"userId\": 2,\r\n  \"quantity\": 1,\r\n  \"movementType\": \"VENTA\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -551,7 +866,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryMovement",
+							"raw": "http://localhost:{{puerto}}/api/CreatePurchase",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -559,19 +874,19 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"InventoryMovement"
+								"CreatePurchase"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "InventoryMovement GetAll",
+					"name": "GetPurchaseResume",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryMovement",
+							"raw": "http://localhost:{{puerto}}/api/GetPurchaseResume/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -579,88 +894,8 @@
 							"port": "{{puerto}}",
 							"path": [
 								"api",
-								"InventoryMovement"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "InventoryMovement GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryMovement/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"InventoryMovement",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "InventoryMovement Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"categoryId\": \"1\",\r\n    \"name\": \"Intel I3\",\r\n    \"description\": \"Procesador marca Intel\",\r\n    \"price\": 180\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryMovement/3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"InventoryMovement",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "InventoryMovement Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:{{puerto}}/api/InventoryMovement/5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "{{puerto}}",
-							"path": [
-								"api",
-								"InventoryMovement",
-								"5"
+								"GetPurchaseResume",
+								"8"
 							]
 						}
 					},

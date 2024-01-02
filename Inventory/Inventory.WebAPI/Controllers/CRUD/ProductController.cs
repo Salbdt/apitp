@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Inventory.WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api")]
     public class ProductController : BaseController<Product>
     {
         private readonly ProductService _productService;
@@ -16,7 +16,7 @@ namespace Inventory.WebAPI.Controllers
             _productService = productService;
         }
 
-        [HttpPost]
+        [HttpPost("CreateProduct")]
         public async Task<IActionResult> Post(ProductPutDTO productPutDTO)
         {
             var item = await _productService.CreateAsync(productPutDTO.ToEntity());
@@ -30,7 +30,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAll()
         {
             List<ProductListDTO> productListDTOs = new List<ProductListDTO>();
@@ -50,7 +50,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetProduct/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var item = await _productService.GetByIdAsync(id);
@@ -63,7 +63,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateProduct/{id}")]
         public async Task<IActionResult> Update(int id, ProductPutDTO productPutDTO)
         {
             var item = await _productService.UpdateAsync(id, productPutDTO.ToEntity());
@@ -76,7 +76,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteProduct/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var item = await _productService.DeleteAsync(id);

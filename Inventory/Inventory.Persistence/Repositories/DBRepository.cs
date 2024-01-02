@@ -1,6 +1,3 @@
-using System.Data;
-using Oracle.ManagedDataAccess.Client;
-
 namespace Inventory.Persistence.Repositories
 {
     public class DBRepository

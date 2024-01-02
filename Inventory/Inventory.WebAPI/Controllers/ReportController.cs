@@ -22,7 +22,7 @@ namespace Inventory.WebAPI.Controllers
         [HttpGet("GetAllProductsBySeller/{userId}")]
         public async Task<IActionResult> GetAllProductsBySeller(int userId)
         {
-            var user = await _userService.GetByIdAsync(userId);            
+            var user = await _userService.GetByIdAsync(userId);
 
             if (user is null)
                 _result = NotFound("Resultado de la búsqueda: Item no encontrado");

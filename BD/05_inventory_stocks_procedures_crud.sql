@@ -16,7 +16,7 @@ BEGIN
         FROM inventory_stocks ist INNER JOIN products p ON ist.product_id = p.id
         WHERE ist.id = v_inventory_stock_id;
         
-    COMMIT;    
+    COMMIT;
 END;
 /
 

@@ -34,7 +34,8 @@ namespace Inventory.Persistence.Repositories.CRUD
                     {
                         Id          = Convert.ToInt32(data.Rows[0]["product_id"]),
                         Name        = data.Rows[0]["product_name"].ToString(),
-                        Description = data.Rows[0]["product_description"].ToString()
+                        Description = data.Rows[0]["product_description"].ToString(),
+                        Price       = Convert.ToInt32(data.Rows[0]["product_price"])
                     },
                     User            = new User
                     {
@@ -73,7 +74,8 @@ namespace Inventory.Persistence.Repositories.CRUD
                     {
                         Id          = Convert.ToInt32(row["product_id"]),
                         Name        = row["product_name"].ToString(),
-                        Description = data.Rows[0]["product_description"].ToString()
+                        Description = data.Rows[0]["product_description"].ToString(),
+                        Price       = Convert.ToInt32(row["product_price"])
                     },
                     User            = new User
                     {
@@ -113,7 +115,8 @@ namespace Inventory.Persistence.Repositories.CRUD
                     {
                         Id          = Convert.ToInt32(data.Rows[0]["product_id"]),
                         Name        = data.Rows[0]["product_name"].ToString(),
-                        Description = data.Rows[0]["product_description"].ToString()
+                        Description = data.Rows[0]["product_description"].ToString(),
+                        Price       = Convert.ToInt32(data.Rows[0]["product_price"])
                     },
                     User            = new User
                     {

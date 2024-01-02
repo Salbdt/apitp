@@ -50,7 +50,7 @@ namespace Inventory.WebAPI.Controllers
             return _result;
         }
 
-        [HttpGet("[controller]/{id}")]
+        [HttpGet("GetPurchaseResume/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var item = await _inventoryMovementService.GetByIdAsync(id);

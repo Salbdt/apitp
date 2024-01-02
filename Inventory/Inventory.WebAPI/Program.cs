@@ -1,5 +1,3 @@
-using Oracle.ManagedDataAccess.Client;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

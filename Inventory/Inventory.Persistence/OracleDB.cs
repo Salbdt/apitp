@@ -33,7 +33,7 @@ namespace Inventory.Persistence
 
             try
             {                
-                await _connection.OpenAsync();
+                _connection.Open();
                 data.Load(await command.ExecuteReaderAsync());
             }
             catch(Exception ex)
