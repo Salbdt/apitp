@@ -65,3 +65,4 @@ Servicio API con ASP.NET Core. Utilizand C# y Oracle.
         - "Endpoints Obligatorios" con los pedidos en el TP.
  - Antes de hacer las pruebas, en la carpeta "BD" se encuentra el script "inserts_bd.sql" que tiene unos pocos datos para ayudar en las pruebas.
  - Finalmente si el servicio está ejecutándose, se puede probar los distintos Endpoints.
+    - Postman tiene definidas dos variables, puerto y token. Una vez hecho el login se puede poner su valor en la variable para no tener que ponerlo en cada Endpoint.
